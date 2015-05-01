@@ -1,0 +1,13 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                template="/common/template/template-main.xhtml">
+    <ui:define name="head">
+        <h:outputStylesheet library="css" name="common.css" />
+    </ui:define>
+    <ui:define name="contentBody">
+        <h:outputText value="Hello #{credentials.username}!" />
+    </ui:define>
+
+</ui:composition>

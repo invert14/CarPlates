@@ -1,0 +1,49 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/common/template/template-header-and-footer.xhtml">
+
+    <ui:define name="head">
+        <h:outputStylesheet library="css" name="login.css" />
+    </ui:define>
+
+    <ui:define name="body">
+        <div id="loginContainer">
+            <h:outputText value="Car Plates Panel"
+                          style="text-align: center; font-size: 14px;" />
+            <h:form id="loginForm" rendered="#{not identity.loggedIn}">
+                <ui:include src="../common/faces-messages.xhtml" />
+                <h:panelGrid columns="2" styleClass="floatLeftWidth100" >
+                    <h:outputLabel for="username" value="Login: " />
+                    <p:inputText id="username" value="#{credentials.username}" required="true" />
+
+                    <h:panelGroup></h:panelGroup>
+                    <h:panelGroup>
+                        <p:message for="username" />
+                    </h:panelGroup>
+
+                    <h:outputLabel for="password" value="Password: " />
+                    <p:password id="password" value="#{credentials.password}" required="true" />
+
+                    <h:panelGroup></h:panelGroup>
+                    <h:panelGroup>
+                        <p:message for="password" />
+                    </h:panelGroup>
+                </h:panelGrid>
+
+                <p:commandButton update="@all"
+                                 value="Log in"
+                                 actionListener="#{identity.login()}"
+                                 ajax="true"
+                                 action="/local/carplates-view?faces-redirect=true"/>
+            </h:form>
+
+            <h:panelGroup rendered="#{identity.loggedIn}">
+                <h:outputText value="Jesteś zalogowany jako #{credentials.username}" />
+            </h:panelGroup>
+
+        </div>
+    </ui:define>
+</ui:composition>

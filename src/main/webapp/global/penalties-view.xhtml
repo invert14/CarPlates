@@ -1,0 +1,144 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/common/template/template-main.xhtml">
+    <ui:define name="head">
+        <h:outputStylesheet library="css" name="common.css" />
+    </ui:define>
+    <ui:define name="contentBody">
+        <h:form id="windowForm">
+
+            <p:dialog id="deatilsDialog"
+                      header="Details"
+                      widgetVar="dets"
+                      dynamic="true"
+                      resizable="true"
+                      showEffect="puff"
+                      hideEffect="puff">
+				
+                <p:dataTable id="dataTable" var="o" value="#{penaltyView.ownersForAddEdit}" widgetVar="ownersTable"
+                             emptyMessage="No owners found with given criteria" filteredValue="#{globalView.filteredOwners}">
+
+                    <f:facet name="header">
+
+                    </f:facet>
+
+                    <p:column id="nameColumn" filterBy="#{o.firstName}"
+                              headerText="First Name"
+                              filterMatchMode="startsWith">
+                        <h:outputText value="#{o.firstName}" />
+                    </p:column>
+
+                    <p:column id="lastNameColumn" filterBy="#{o.lastName}"
+                              headerText="Last Name"
+                              filterMatchMode="startsWith">
+                        <h:outputText value="#{o.lastName}" />
+                    </p:column>
+
+                    <p:column id="peselColumn" filterBy="#{o.pesel}"
+                              headerText="PESEL"
+                              filterMatchMode="startsWith">
+                        <h:outputText value="#{o.pesel}" />
+                    </p:column>
+
+                    <p:column id="cityColumn" filterBy="#{o.cityAddress}"
+                              headerText="City"
+                              filterMatchMode="startsWith">
+                        <h:outputText value="#{o.cityAddress}" />
+                    </p:column>
+
+                    <p:column id="postcodeColumn" filterBy="#{o.postCodeAddress}"
+                              headerText="Post code"
+                              filterMatchMode="startsWith">
+                        <h:outputText value="#{o.postCodeAddress}" />
+                    </p:column>
+
+                    <p:column id="streetColumn" filterBy="#{o.streetAddress}"
+                              headerText="Street"
+                              filterMatchMode="startsWith">
+                        <h:outputText value="#{o.streetAddress}" />
+                    </p:column>
+
+                </p:dataTable>
+
+            </p:dialog>
+
+        </h:form>
+
+
+
+        <h:form>
+        
+	        <p:button href="/faces/global/penalty-creator.xhtml"
+              value="Add new"
+              style="float: left;" rendered="#{userSession.global}"/>
+
+            <p:dataTable id="dataTable" var="c" value="#{penaltyView.getPenalties}" widgetVar="carPlatesTable"
+                         emptyMessage="No penalties found with given criteria" filteredValue="#{globalView.filteredCarPlates}">
+
+                <f:facet name="header">
+
+                </f:facet>
+
+                <p:column id="driverIdColumn" filterBy="#{c.driverid}"
+                          headerText="Driver Id"
+                          filterMatchMode="startsWith">
+                    <h:outputText value="#{c.driverid}" />
+                </p:column>
+                
+                <p:column id="regionIdColumn" filterBy="#{c.regionid}"
+                          headerText="Region"
+                          filterMatchMode="startsWith">
+                    <h:outputText value="#{c.regionid}" />
+                </p:column>
+
+                <p:column id="titleColumn" filterBy="#{c.title}"
+                          headerText="Title"
+                          filterMatchMode="startsWith">
+                    <h:outputText value="#{c.title}" />
+                </p:column>
+
+                <p:column id="descriptionColumn" filterBy="#{c.description}"
+                          headerText="Description"
+                          filterMatchMode="startsWith">
+                    <h:outputText value="#{c.description}"/>
+                </p:column>
+
+                <p:column id="pointsColumn" filterBy="#{c.points}"
+                          headerText="Points"
+                          filterMatchMode="startsWith">
+                    <h:outputText value="#{c.points}"/>
+                </p:column>
+                
+                <p:column id="startDateColumn" filterBy="#{c.startDate}"
+                          headerText="Start Date"
+                          filterMatchMode="startsWith">
+                    <h:outputText value="#{c.startDate}">
+                        <f:convertDateTime pattern="yyyy-MM-dd" />
+                    </h:outputText>
+                </p:column>
+
+                <p:column headerText="details">
+                    <p:commandButton icon="ui-icon-search"
+                                     process="@this"
+                                     update=":windowForm"
+                                     oncomplete="dets.show()">
+                        <f:setPropertyActionListener value="#{c}" target="#{penaltyView.penalty}"/>
+                    </p:commandButton>
+                </p:column>
+                
+                <p:column headerText="edit" style="text-align: center;">
+                	<p:button href="/faces/global/penalty-creator.xhtml?penaltyId=#{c.id}"
+                          icon="ui-icon-pencil"/>
+            	</p:column>
+            	
+            	<p:column headerText="delete" style="text-align: center;">
+            		<p:commandButton action="#{penaltyView.removePenalty(c.id)}" icon="ui-icon-trash" />
+            	</p:column>
+            </p:dataTable>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

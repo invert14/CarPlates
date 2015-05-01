@@ -1,0 +1,12 @@
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+              xmlns:ui="http://java.sun.com/jsf/facelets"
+              xmlns:h="http://java.sun.com/jsf/html"
+              xmlns:p="http://primefaces.org/ui">
+
+    <p:ajaxStatus onstart="statusDialog.show();" onsuccess="statusDialog.hide();"/>
+
+    <p:dialog modal="true" widgetVar="statusDialog" resizable="false" draggable="false" closable="false"
+              showHeader="false" width="120" height="80" showEffect="fade" hideEffect="fade">
+        <h:outputText value="Proszę czekać ..." />
+    </p:dialog>
+</ui:component>

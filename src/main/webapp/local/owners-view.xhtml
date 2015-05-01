@@ -1,0 +1,177 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/common/template/template-main.xhtml">
+    <ui:define name="head">
+        <h:outputStylesheet library="css" name="common.css" />
+    </ui:define>
+    <ui:define name="contentBody">
+        <h:form id="windowForm">
+
+            <p:dialog id="deatilsDialog"
+                      header="Details"
+                      widgetVar="dets"
+                      dynamic="true"
+                      resizable="true"
+                      showEffect="puff"
+                      hideEffect="puff">
+
+                <p:dataTable id="dataTable" var="c" value="#{ownersView.owner.carPlatesList}" widgetVar="carPlatesTable"
+                             emptyMessage="No car plates found with given criteria" filteredValue="#{carPlatesView.filteredCarPlates}">
+
+                    <f:facet name="header">
+
+                    </f:facet>
+
+                    <p:column id="carBrandColumn" filterBy="#{c.carBrand}"
+                              headerText="Brand"
+                              filterMatchMode="startsWith">
+                        <h:outputText value="#{c.carBrand}" />
+                    </p:column>
+
+                    <p:column id="carModelColumn" filterBy="#{c.carModel}"
+                              headerText="Model"
+                              filterMatchMode="startsWith">
+                        <h:outputText value="#{c.carModel}" />
+                    </p:column>
+
+                    <p:column id="firstRegistrationDateColumn" filterBy="#{c.firstRegistrationDate}"
+                              headerText="First Reg. Date"
+                              filterMatchMode="startsWith">
+                        <h:outputText value="#{c.firstRegistrationDate}">
+                            <f:convertDateTime pattern="yyyy-MM-dd" />
+                        </h:outputText>
+                    </p:column>
+
+                    <p:column id="registrationDateColumn" filterBy="#{c.registrationDate}"
+                              headerText="Reg. date"
+                              filterMatchMode="startsWith">
+                        <h:outputText value="#{c.registrationDate}">
+                            <f:convertDateTime pattern="yyyy-MM-dd" />
+                        </h:outputText>
+                    </p:column>
+
+                    <p:column id="registrationExpirationDateColumn" filterBy="#{c.registrationExpirationDate}"
+                              headerText="Reg. expired at"
+                              filterMatchMode="startsWith">
+                        <h:outputText value="#{c.registrationExpirationDate}">
+                            <f:convertDateTime pattern="yyyy-MM-dd" />
+                        </h:outputText>
+                    </p:column>
+
+                    <p:column id="vinColumn" filterBy="#{c.vin}"
+                              headerText="VIN"
+                              filterMatchMode="startsWith">
+                        <h:outputText value="#{c.vin}" />
+                    </p:column>
+
+                    <p:column id="registrationAuthorityColumn" filterBy="#{c.registrationAuthority.fullName}"
+                              headerText="Reg. authority"
+                              filterMatchMode="startsWith">
+                        <h:outputText value="#{c.registrationAuthority.fullName}" />
+                    </p:column>
+
+                    <p:column id="regnumber" filterBy="#{c.registrationNumber}"
+                              headerText="Reg. No."
+                              filterMatchMode="startsWith">
+                        <h:outputText value="#{c.registrationNumber}" />
+                    </p:column>
+
+                </p:dataTable>
+
+            </p:dialog>
+
+        </h:form>
+        <h:form>
+
+            <p:button href="/faces/local/owner-creator.xhtml"
+                      value="Add new"
+                      style="float: left;" rendered="#{userSession.local}"/>
+
+            <p:dataTable id="dataTable" var="o" value="#{ownersView.owners}" widgetVar="carsTable"
+                         emptyMessage="No owners found with given criteria" filteredValue="#{ownersView.filteredOwners}">
+
+                <f:facet name="header">
+
+                </f:facet>
+
+                <p:column id="nameColumn" filterBy="#{o.firstName}"
+                          filterMatchMode="startsWith">
+                    <f:facet name="header">
+                        <h:commandLink action="#{ownersView.sortBy('firstName')}">
+                            First Name
+                        </h:commandLink>
+                    </f:facet>
+                    <h:outputText value="#{o.firstName}" />
+                </p:column>
+
+                <p:column id="lastNameColumn" filterBy="#{o.lastName}"
+                          filterMatchMode="startsWith">
+                    <f:facet name="header">
+                        <h:commandLink action="#{ownersView.sortBy('lastName')}">
+                            Last Name
+                        </h:commandLink>
+                    </f:facet>
+                    <h:outputText value="#{o.lastName}" />
+                </p:column>
+
+                <p:column id="peselColumn" filterBy="#{o.pesel}"
+                          filterMatchMode="startsWith">
+                    <f:facet name="header">
+                        <h:commandLink action="#{ownersView.sortBy('pesel')}">
+                            PESEL
+                        </h:commandLink>
+                    </f:facet>
+                    <h:outputText value="#{o.pesel}" />
+                </p:column>
+
+                <p:column id="cityColumn" filterBy="#{o.cityAddress}"
+                          filterMatchMode="startsWith">
+                    <f:facet name="header">
+                        <h:commandLink action="#{ownersView.sortBy('city')}">
+                            City
+                        </h:commandLink>
+                    </f:facet>
+                    <h:outputText value="#{o.cityAddress}" />
+                </p:column>
+
+                <p:column id="postcodeColumn" filterBy="#{o.postCodeAddress}"
+                          filterMatchMode="startsWith">
+                    <f:facet name="header">
+                        <h:commandLink action="#{ownersView.sortBy('postCode')}">
+                            Post code
+                        </h:commandLink>
+                    </f:facet>
+                    <h:outputText value="#{o.postCodeAddress}" />
+                </p:column>
+
+                <p:column id="streetColumn" filterBy="#{o.streetAddress}"
+                          filterMatchMode="startsWith">
+                    <f:facet name="header">
+                        <h:commandLink action="#{ownersView.sortBy('street')}">
+                            Street
+                        </h:commandLink>
+                    </f:facet>
+                    <h:outputText value="#{o.streetAddress}" />
+                </p:column>
+
+                <p:column headerText="details">
+                    <p:commandButton icon="ui-icon-search"
+                                     process="@this"
+                                     update=":windowForm"
+                                     oncomplete="dets.show()">
+                        <f:setPropertyActionListener value="#{o}" target="#{ownersView.owner}"/>
+                    </p:commandButton>
+                </p:column>
+
+                <p:column headerText="edit" style="text-align: center;">
+                    <p:button href="/faces/local/owner-creator.xhtml?ownerId=#{o.id}"
+                              icon="ui-icon-pencil"/>
+                </p:column>
+            </p:dataTable>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

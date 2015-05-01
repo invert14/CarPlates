@@ -1,0 +1,115 @@
+body, div, img, a, table, ul, li, form, p {
+    margin: 0;
+    padding: 0;
+    border: none;
+    font-size: 11px;
+    font-family: Arial, Verdana, Times New Roman, Monospace;
+}
+
+body {
+    background: #f9f9f9;
+}
+
+button, input {
+    font-size: 11px !important;
+    font-family: Arial, Verdana, Times New Roman, Monospace !important;
+}
+
+.customIcon {
+    float: left;
+    width: 20px;
+    height: 16px;
+}
+
+.addIcon {
+    background: url("#{resource['images:icons/add.png']}") no-repeat !important;
+}
+
+.listIcon {
+    background: url("#{resource['images:icons/type_list.png']}") no-repeat !important;
+}
+
+.logoutIcon {
+    background: url("#{resource['images:icons/logout.png']}") no-repeat !important;
+}
+
+/* main panels */
+#main {
+    width: 980px;
+    margin: auto;
+    display: block;
+    position: relative;
+    padding: 0 10px 0 10px;
+    background: white;
+    box-shadow: 0 0 36px #888888;
+}
+
+#header-panel {
+    float: left;
+    width: 100%;
+    position: relative;
+}
+
+#content-panel {
+    float: left;
+    width: 100%;
+    position: relative;
+}
+
+.headerTxt {
+    border-bottom: 1px solid #555555;
+    float: left;
+    font-size: 16px;
+    margin: 10px 0 16px 0;
+    padding: 0 0 2px;
+    width: 100%;
+}
+
+#bottom-panel {
+    float: left;
+    width: 100%;
+    margin: 10px 0 0 0;
+}
+
+/* commons */
+.footer {
+    clear: both;
+    display: block;
+}
+
+.floatLeftWidth100 {
+    float: left;
+    width: 100%;
+    position: relative;
+}
+
+.floatLeft {
+    float: left;
+    position: relative;
+}
+
+/* primefaces */
+.ui-wizard-step-title {
+    font-size: 13px !important;
+}
+
+.ui-state-highlight {
+    background: #3f6ad1 !important;
+    border-color: #2b4eab !important;
+    color: white !important;
+}
+
+.ui-state-highlight,
+.ui-widget-content .ui-state-highlight,
+.ui-widget-header .ui-state-highlight {
+    background: #3f6ad1 !important;
+    border-color: #2b4eab !important;
+    color: white !important;
+}
+.ui-datatable-odd {
+    background: #ffffff;
+}
+
+.ui-datatable-even {
+    background: #F2F5F9;
+}

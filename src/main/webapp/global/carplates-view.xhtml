@@ -1,0 +1,176 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/common/template/template-main.xhtml">
+    <ui:define name="head">
+        <h:outputStylesheet library="css" name="common.css" />
+    </ui:define>
+    <ui:define name="contentBody">
+        <h:form id="windowForm">
+
+            <p:dialog id="deatilsDialog"
+                      header="Details"
+                      widgetVar="dets"
+                      dynamic="true"
+                      resizable="true"
+                      showEffect="puff"
+                      hideEffect="puff">
+                    <p:dataTable id="dataTable" var="o" value="#{globalView.carPlate.ownersList}" widgetVar="ownersTable"
+                                 emptyMessage="No owners found with given criteria" filteredValue="#{globalView.filteredOwners}">
+
+                        <f:facet name="header">
+
+                        </f:facet>
+
+                        <p:column id="nameColumn" filterBy="#{o.firstName}"
+                                  headerText="First Name"
+                                  filterMatchMode="startsWith">
+                            <h:outputText value="#{o.firstName}" />
+                        </p:column>
+
+                        <p:column id="lastNameColumn" filterBy="#{o.lastName}"
+                                  headerText="Last Name"
+                                  filterMatchMode="startsWith">
+                            <h:outputText value="#{o.lastName}" />
+                        </p:column>
+
+                        <p:column id="peselColumn" filterBy="#{o.pesel}"
+                                  headerText="PESEL"
+                                  filterMatchMode="startsWith">
+                            <h:outputText value="#{o.pesel}" />
+                        </p:column>
+
+                        <p:column id="cityColumn" filterBy="#{o.cityAddress}"
+                                  headerText="City"
+                                  filterMatchMode="startsWith">
+                            <h:outputText value="#{o.cityAddress}" />
+                        </p:column>
+
+                        <p:column id="postcodeColumn" filterBy="#{o.postCodeAddress}"
+                                  headerText="Post code"
+                                  filterMatchMode="startsWith">
+                            <h:outputText value="#{o.postCodeAddress}" />
+                        </p:column>
+
+                        <p:column id="streetColumn" filterBy="#{o.streetAddress}"
+                                  headerText="Street"
+                                  filterMatchMode="startsWith">
+                            <h:outputText value="#{o.streetAddress}" />
+                        </p:column>
+
+                    </p:dataTable>
+            </p:dialog>
+
+        </h:form>
+
+
+        <h:form>
+
+            <p:dataTable id="dataTable" var="c" value="#{globalView.allCarPlates}" widgetVar="carPlatesTable"
+                         emptyMessage="No car plates found with given criteria" filteredValue="#{globalView.filteredCarPlates}">
+
+                <f:facet name="header">
+
+                </f:facet>
+
+                <p:column id="carBrandColumn" filterBy="#{c.carBrand}"
+                          filterMatchMode="startsWith">
+                    <f:facet name="header">
+                        <h:commandLink action="#{globalView.sortPlateBy('brand')}">
+                            Brand
+                        </h:commandLink>
+                    </f:facet>
+                    <h:outputText value="#{c.carBrand}" />
+                </p:column>
+
+                <p:column id="carModelColumn" filterBy="#{c.carModel}"
+                          filterMatchMode="startsWith">
+                    <f:facet name="header">
+                        <h:commandLink action="#{globalView.sortPlateBy('model')}">
+                            Model
+                        </h:commandLink>
+                    </f:facet>
+                    <h:outputText value="#{c.carModel}" />
+                </p:column>
+
+                <p:column id="firstRegistrationDateColumn" filterBy="#{c.firstRegistrationDate}"
+                          filterMatchMode="startsWith">
+                    <f:facet name="header">
+                        <h:commandLink action="#{globalView.sortPlateBy('firstRegDate')}">
+                            First Reg. Date
+                        </h:commandLink>
+                    </f:facet>
+                    <h:outputText value="#{c.firstRegistrationDate}">
+                        <f:convertDateTime pattern="yyyy-MM-dd" />
+                    </h:outputText>
+                </p:column>
+
+                <p:column id="registrationDateColumn" filterBy="#{c.registrationDate}"
+                          filterMatchMode="startsWith">
+                    <f:facet name="header">
+                        <h:commandLink action="#{globalView.sortPlateBy('regDate')}">
+                            Reg. date
+                        </h:commandLink>
+                    </f:facet>
+                    <h:outputText value="#{c.registrationDate}">
+                        <f:convertDateTime pattern="yyyy-MM-dd" />
+                    </h:outputText>
+                </p:column>
+
+                <p:column id="registrationExpirationDateColumn" filterBy="#{c.registrationExpirationDate}"
+                          filterMatchMode="startsWith">
+                    <f:facet name="header">
+                        <h:commandLink action="#{globalView.sortPlateBy('expiryDate')}">
+                            Reg. expired at
+                        </h:commandLink>
+                    </f:facet>
+                    <h:outputText value="#{c.registrationExpirationDate}">
+                        <f:convertDateTime pattern="yyyy-MM-dd" />
+                    </h:outputText>
+                </p:column>
+
+                <p:column id="vinColumn" filterBy="#{c.vin}"
+                          filterMatchMode="startsWith">
+                    <f:facet name="header">
+                        <h:commandLink action="#{globalView.sortPlateBy('vin')}">
+                            VIN
+                        </h:commandLink>
+                    </f:facet>
+                    <h:outputText value="#{c.vin}" />
+                </p:column>
+
+                <p:column id="registrationAuthorityColumn" filterBy="#{c.registrationAuthority.fullName}"
+                          filterMatchMode="startsWith">
+                    <f:facet name="header">
+                        <h:commandLink action="#{globalView.sortPlateBy('auth')}">
+                            Reg. authority
+                        </h:commandLink>
+                    </f:facet>
+                    <h:outputText value="#{c.registrationAuthority.fullName}" />
+                </p:column>
+
+                <p:column id="regnumber" filterBy="#{c.registrationNumber}"
+                          filterMatchMode="startsWith">
+                    <f:facet name="header">
+                        <h:commandLink action="#{globalView.sortPlateBy('regNo')}">
+                            Reg. No.
+                        </h:commandLink>
+                    </f:facet>
+                    <h:outputText value="#{c.registrationNumber}" />
+                </p:column>
+
+                <p:column headerText="details">
+                    <p:commandButton icon="ui-icon-search"
+                                     process="@this"
+                                     update=":windowForm"
+                                     oncomplete="dets.show()">
+                        <f:setPropertyActionListener value="#{c}" target="#{globalView.carPlate}"/>
+                    </p:commandButton>
+                </p:column>
+            </p:dataTable>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

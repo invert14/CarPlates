@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/common/template/template-main.xhtml">
+
+<ui:define name="head">
+    <h:outputStylesheet library="css" name="common.css"/>
+</ui:define>
+
+<ui:define name="contentBody">
+<h:form rendered="#{carPlatesView.carPlate != null}"
+        styleClass="floatLeftWidth100">
+<ui:include src="/common/faces-messages.xhtml"/>
+<h:panelGrid columns="2">
+
+    <h:outputText value="Brand"/>
+    <h:inputText value="#{carPlatesView.carPlate.carBrand}"/>
+
+    <h:outputText value="Model"/>
+    <h:inputText value="#{carPlatesView.carPlate.carModel}"/>
+
+    <h:outputText value="First Reg. Date"/>
+    <p:calendar value="#{carPlatesView.carPlate.firstRegistrationDate}" id="firsRegistrationDateCalendar" pattern="yyyy-MM-dd"/>
+
+    <h:outputText value="Reg. Date"/>
+    <p:calendar value="#{carPlatesView.carPlate.registrationDate}" id="registrationDateCalendar" pattern="yyyy-MM-dd" />
+
+    <h:outputText value="Expiration Date"/>
+    <p:calendar value="#{carPlatesView.carPlate.registrationExpirationDate}" id="registrationExpirationDateCalendar" pattern="yyyy-MM-dd" />
+
+    <h:outputText value="VIN"/>
+    <h:inputText value="#{carPlatesView.carPlate.vin}"/>
+
+    <h:outputText value="Reg. Number"/>
+    <h:inputText value="#{carPlatesView.carPlate.registrationNumber}"/>
+
+    <h:outputText value="Owners"/>
+    <p:selectManyMenu value="#{carPlatesView.ownersForAddEdit}" immediate="true" converter="owner.converter">
+        <f:selectItems value="#{ownersView.owners}"
+                       var="own"
+                       itemLabel="#{own.lastName} #{own.firstName}"
+                       itemValue="#{own}"/>
+    </p:selectManyMenu>
+
+    <p:messages globalOnly="false"/>
+
+
+</h:panelGrid>
+<p:separator/>
+<h:panelGrid columns="1" styleClass="floatLeftWidth100">
+    <h:panelGroup styleClass="floatLeftWidth100">
+        <p:commandButton value="Zapisz"
+                         action="#{carPlatesView.saveNew}"
+                         rendered="#{carPlatesView.mode == 'ADD'}"
+                         icon="ui-icon-check"
+                         update="@form"/>
+        <p:commandButton value="Edytuj"
+                         rendered="#{carPlatesView.mode == 'EDIT'}"
+                         action="#{carPlatesView.edit}"
+                         icon="ui-icon-check"
+                         update="@form"/>
+        <p:button value="Powrót" href="/faces/local/carplates-view.xhtml"/>
+    </h:panelGroup>
+</h:panelGrid>
+</h:form>
+</ui:define>
+</ui:composition>

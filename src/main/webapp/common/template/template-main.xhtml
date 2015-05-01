@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:jsp="http://java.sun.com/JSP/Page"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/common/template/template-header-and-footer.xhtml">
+
+    <ui:define name="head">
+        <ui:insert name="head" />
+    </ui:define>
+
+    <ui:define name="body">
+        <!--<ui:include src="/common/wait-status.xhtml" />-->
+
+        <h:panelGroup id="main">
+            <h:panelGroup id="header-panel">
+                <ui:include src="partial/main-menu.xhtml" />
+            </h:panelGroup>
+
+            <h:panelGroup id="content-panel">
+                <ui:insert name="contentBody" />
+            </h:panelGroup>
+
+            <h:panelGroup id="bottom-panel">
+            </h:panelGroup>
+
+            <h:panelGroup styleClass="footer"></h:panelGroup>
+        </h:panelGroup>
+    </ui:define>
+</ui:composition>

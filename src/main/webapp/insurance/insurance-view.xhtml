@@ -1,0 +1,59 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                template="/common/template/template-main.xhtml"
+                xmlns:p="http://primefaces.org/ui">
+    <ui:define name="head">
+        <h:outputStylesheet library="css" name="common.css" />
+    </ui:define>
+
+    <ui:define name="contentBody">
+        
+        <h:outputText value="#{insuranceView.currentTime}"/>
+        
+        <p:dataTable id="dataTable" var="i" value="#{insuranceView.insurances}" widgetVar="insurancesTable"
+                     emptyMessage="No insurances found!">
+
+            <f:facet name="header">
+
+            </f:facet>
+
+            <p:column id="insuranceNumberColumn"
+                      headerText="Number"
+                      filterMatchMode="startsWith">
+                <h:outputText value="#{i.insuranceNumber}" />
+            </p:column>
+
+            <p:column id="companyNameColumn"
+                      headerText="Company"
+                      filterMatchMode="startsWith">
+                <h:outputText value="#{i.company}" />
+            </p:column>
+
+            <p:column id="startDateColumn"
+                      headerText="Start Date"
+                      filterMatchMode="startsWith">
+                <h:outputText value="#{i.startDate}">
+                    <f:convertDateTime pattern="yyyy-MM-dd" />
+                </h:outputText>
+            </p:column>
+
+            <p:column id="endDateColumn"
+                      headerText="End Date"
+                      filterMatchMode="startsWith">
+                <h:outputText value="#{i.endDate}">
+                    <f:convertDateTime pattern="yyyy-MM-dd" />
+                </h:outputText>
+            </p:column>
+
+            <p:column id="carPlateColumn"
+                      headerText="Car Plate"
+                      filterMatchMode="startsWith">
+                <h:outputText value="#{insuranceView.getRegistrationNumber(i.carplateid)}"/>
+            </p:column>
+
+        </p:dataTable>
+    </ui:define>
+
+</ui:composition>

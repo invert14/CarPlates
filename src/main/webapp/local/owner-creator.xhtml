@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/common/template/template-main.xhtml">
+
+<ui:define name="head">
+    <h:outputStylesheet library="css" name="common.css"/>
+</ui:define>
+
+<ui:define name="contentBody">
+<h:form rendered="#{ownersView.owner != null}"
+        styleClass="floatLeftWidth100">
+<ui:include src="/common/faces-messages.xhtml"/>
+<h:panelGrid columns="2">
+
+    <h:outputText value="PESEL"/>
+    <h:inputText value="#{ownersView.owner.pesel}"/>
+
+    <h:outputText value="First Name"/>
+    <h:inputText value="#{ownersView.owner.firstName}"/>
+
+    <h:outputText value="Last Name"/>
+    <h:inputText value="#{ownersView.owner.lastName}"/>
+
+    <h:outputText value="City Address"/>
+    <h:inputText value="#{ownersView.owner.cityAddress}"/>
+
+    <h:outputText value="Post Code"/>
+    <h:inputText value="#{ownersView.owner.postCodeAddress}"/>
+
+    <h:outputText value="Street"/>
+    <h:inputText value="#{ownersView.owner.streetAddress}"/>
+
+    <p:messages globalOnly="false"/>
+
+
+</h:panelGrid>
+<p:separator/>
+<h:panelGrid columns="1" styleClass="floatLeftWidth100">
+    <h:panelGroup styleClass="floatLeftWidth100">
+        <p:commandButton value="Zapisz"
+                         action="#{ownersView.saveNew}"
+                         rendered="#{ownersView.mode == 'ADD'}"
+                         icon="ui-icon-check"
+                         update="@form"/>
+        <p:commandButton value="Edytuj"
+                         rendered="#{ownersView.mode == 'EDIT'}"
+                         action="#{ownersView.edit}"
+                         icon="ui-icon-check"
+                         update="@form"/>
+        <p:button value="Powrót" href="/faces/local/owners-view.xhtml"/>
+    </h:panelGroup>
+</h:panelGrid>
+</h:form>
+</ui:define>
+</ui:composition>

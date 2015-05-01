@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/common/template/template-main.xhtml">
+
+    <ui:define name="head">
+        <h:outputStylesheet library="css" name="common.css"/>
+    </ui:define>
+
+    <ui:define name="contentBody">
+        <h:form rendered="#{penaltyView.penalty != null}"
+                styleClass="floatLeftWidth100">
+            <ui:include src="/common/faces-messages.xhtml"/>
+            <h:panelGrid columns="2">
+
+
+                <h:outputText value="Driver"/>
+                <p:selectOneMenu value="#{penaltyView.driverForAddEdit}" immediate="true" converter="owner.global.converter">
+                    <f:selectItems value="#{globalView.allOwners}"
+                                   var="own"
+                                   itemLabel="#{own.lastName} #{own.firstName}"
+                                   itemValue="#{own}"/>
+                </p:selectOneMenu>
+
+                <h:outputText value="Title"/>
+                <h:inputText value="#{penaltyView.penalty.title}"/>
+
+                <h:outputText value="Description"/>
+                <h:inputText value="#{penaltyView.penalty.description}"/>
+
+                <h:outputText value="Points"/>
+                <h:inputText value="#{penaltyView.penalty.points}"/>
+
+                <h:outputText value="Start Date"/>
+                <p:calendar value="#{penaltyView.penalty.startDate}" id="registrationExpirationDateCalendar" pattern="yyyy-MM-dd" />
+
+                <p:messages globalOnly="false"/>
+
+
+            </h:panelGrid>
+            <p:separator/>
+            <h:panelGrid columns="1" styleClass="floatLeftWidth100">
+                <h:panelGroup styleClass="floatLeftWidth100">
+                    <p:commandButton value="Zapisz"
+                                     action="#{penaltyView.saveNew}"
+                                     rendered="#{penaltyView.mode == 'ADD'}"
+                                     icon="ui-icon-check"
+                                     update="@form"/>
+                    <p:commandButton value="Edytuj"
+                                     rendered="#{penaltyView.mode == 'EDIT'}"
+                                     action="#{penaltyView.edit}"
+                                     icon="ui-icon-check"
+                                     update="@form"/>
+                    <p:button value="Powrót" href="/faces/global/penalties-view.xhtml"/>
+                </h:panelGroup>
+            </h:panelGrid>
+        </h:form>
+    </ui:define>
+</ui:composition>
