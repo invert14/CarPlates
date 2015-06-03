@@ -73,7 +73,7 @@
                       resizable="true"
                       showEffect="puff"
                       hideEffect="puff">
-                <p:outputLabel value="#{insuranceView.isCarplateInsured(globalView.carPlate.id)}" />
+                <p:outputLabel value="#{insuranceView.isCarplateInsured(globalView.carPlate.registrationNumber)}" />
             </p:dialog>
         </h:form>
 
@@ -176,7 +176,7 @@
                     <f:facet name="header">
                         Is insured
                     </f:facet>
-                    <h:outputText value="#{insuranceView.isCarplateInsured(c.id)}" />
+                    <h:outputText value="#{insuranceView.isCarplateInsured(c.registrationNumber)}" />
                 </p:column>
 
                 <p:column headerText="insurance">

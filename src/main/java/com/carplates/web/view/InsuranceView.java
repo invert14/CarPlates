@@ -47,24 +47,16 @@ public class InsuranceView implements Serializable {
         return new ArrayList<Insurance>();
     }
 
-    public Boolean isCarplateInsured(long plateId) {
-        Insurance i = insurancesManager.find(plateId);
+    public Boolean isCarplateInsured(String carplate) {
+        Insurance i = insurancesManager.find(carplate);
         if (i == null) {
-            i = insurancesManager2.find(plateId);
+            i = insurancesManager2.find(carplate);
         }
 
         if (i == null) {
             return false;
         }
         return i.isValid();
-    }
-
-    public String getRegistrationNumber(long plateId) {
-        CarPlate carPlate = carPlatesManager.getCarPlateById(plateId);
-        if (carPlate != null) {
-            return carPlate.getRegistrationNumber();
-        }
-        return "-- NONE --";
     }
 
     public String getCurrentTime() {

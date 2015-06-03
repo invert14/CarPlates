@@ -20,9 +20,9 @@ public class InsurancesManager {
         return results;
     }
 
-    public Insurance find(long plateId) {
+    public Insurance find(String carplate) {
         Query q = insurancesEntityManager.createQuery(
-            "select i from Insurance i where i.carplateid = " + String.valueOf(plateId));
+            "select i from Insurance i where i.carplate = '" + carplate + "'");
 
         Insurance result;
 

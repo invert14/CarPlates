@@ -24,14 +24,14 @@ public class Insurance {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long carplateid;
+    private String carplate;
 
-    public Long getCarplateid() {
-        return carplateid;
+    public String getCarplate() {
+        return carplate;
     }
 
-    public void setCarplateid(Long carplateid) {
-        this.carplateid = carplateid;
+    public void setCarplate(String carplate) {
+        this.carplate = carplate;
     }
 
     private String insuranceNumber;
