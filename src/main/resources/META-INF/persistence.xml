@@ -49,7 +49,7 @@
   <persistence-unit name="GD" transaction-type="JTA">
     <description>GD</description>
     <provider>org.hibernate.ejb.HibernatePersistence</provider>
-    <jta-data-source>java:jboss/datasources/GADSX</jta-data-source>
+    <jta-data-source>java:jboss/datasources/GDSX</jta-data-source>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <!--<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQL82Dialect"/>-->
@@ -64,7 +64,7 @@
   <persistence-unit name="GA" transaction-type="JTA">
     <description>GA</description>
     <provider>org.hibernate.ejb.HibernatePersistence</provider>
-    <jta-data-source>java:jboss/datasources/GADSX</jta-data-source>
+    <jta-data-source>java:jboss/datasources/GASX</jta-data-source>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <!--<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQL82Dialect"/>-->
@@ -79,7 +79,7 @@
   <persistence-unit name="GSP" transaction-type="JTA">
     <description>GSP</description>
     <provider>org.hibernate.ejb.HibernatePersistence</provider>
-    <jta-data-source>java:jboss/datasources/GADSX</jta-data-source>
+    <jta-data-source>java:jboss/datasources/GDSX</jta-data-source>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <!--<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQL82Dialect"/>-->

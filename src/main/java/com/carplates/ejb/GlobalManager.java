@@ -48,7 +48,7 @@ public class GlobalManager {
         allManagers = new HashMap<String, EntityManager>();
         allManagers.put("GD", entityManagerGD);
         allManagers.put("GA", entityManagerGA);
-        allManagers.put("GSP", entityManagerGSP);
+//        allManagers.put("GSP", entityManagerGSP);
 
     }
 

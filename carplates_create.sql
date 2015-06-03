@@ -1,9 +1,9 @@
---DROP TABLE owners;
+/*--DROP TABLE owners;
 --DROP TABLE registrationauthorities;
 --DROP TABLE users;
 --DROP TABLE carplates;
 --DROP TABLE carplates_owners;
---DROP TABLE penalties;
+--DROP TABLE penalties;*/
 
 CREATE TABLE owners
 (
