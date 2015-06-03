@@ -54,10 +54,8 @@ public class InsuranceView implements Serializable {
         }
 
         if (i == null) {
-            System.err.println("is insured: " + plateId + ": false");
             return false;
         }
-        System.err.println("is insured: " + plateId + ": " + i.isValid().toString());
         return i.isValid();
     }
 
