@@ -1,9 +1,9 @@
-DROP TABLE owners;
-DROP TABLE registrationauthorities;
-DROP TABLE users;
-DROP TABLE carplates;
-DROP TABLE carplates_owners;
-DROP TABLE penalties;
+--DROP TABLE owners;
+--DROP TABLE registrationauthorities;
+--DROP TABLE users;
+--DROP TABLE carplates;
+--DROP TABLE carplates_owners;
+--DROP TABLE penalties;
 
 CREATE TABLE owners
 (
@@ -67,5 +67,3 @@ CREATE TABLE carplates_owners
   CONSTRAINT fk1f44c72e3bd348e1 FOREIGN KEY (ownerid)
       REFERENCES owners (id) ON DELETE CASCADE
 );
-  
-

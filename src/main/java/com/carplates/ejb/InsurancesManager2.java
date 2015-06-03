@@ -9,9 +9,9 @@ import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 @Stateless
-public class InsurancesManager {
+public class InsurancesManager2 {
 
-    @PersistenceContext(unitName = "INSPZU")
+    @PersistenceContext(unitName = "INSWRT")
     EntityManager insurancesEntityManager;
 
     public List<Insurance> findAll() {
@@ -34,7 +34,7 @@ public class InsurancesManager {
         }
         return result;
     }
-    
+
     public void persist(Insurance insurance) {
         insurancesEntityManager.persist(insurance);
     }

@@ -1,14 +1,13 @@
 package com.carplates.domain;
 
+import java.util.Calendar;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -26,6 +25,7 @@ public class Insurance {
     private Long id;
 
     private Long carplateid;
+
     public Long getCarplateid() {
         return carplateid;
     }
@@ -33,10 +33,8 @@ public class Insurance {
     public void setCarplateid(Long carplateid) {
         this.carplateid = carplateid;
     }
-    
-    private String insuranceNumber;
 
-    private String company;
+    private String insuranceNumber;
 
     @Temporal(TemporalType.DATE)
     private Date startDate;
@@ -60,14 +58,6 @@ public class Insurance {
         this.insuranceNumber = insuranceNumber;
     }
 
-    public String getCompany() {
-        return company;
-    }
-
-    public void setCompany(String company) {
-        this.company = company;
-    }
-
     public Date getStartDate() {
         return startDate;
     }
@@ -82,6 +72,11 @@ public class Insurance {
 
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
+    }
+
+    public Boolean isValid() {
+        Date date = Calendar.getInstance().getTime();
+        return startDate.before(date) && endDate.after(date);
     }
 
     @Override

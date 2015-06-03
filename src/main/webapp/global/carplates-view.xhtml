@@ -65,6 +65,17 @@
 
         </h:form>
 
+        <h:form id="insuranceForm">
+            <p:dialog id="insuranceDialog"
+                      header="Insurance details"
+                      widgetVar="insur"
+                      dynamic="true"
+                      resizable="true"
+                      showEffect="puff"
+                      hideEffect="puff">
+                <p:outputLabel value="#{insuranceView.isCarplateInsured(globalView.carPlate.id)}" />
+            </p:dialog>
+        </h:form>
 
         <h:form>
 
@@ -159,6 +170,22 @@
                         </h:commandLink>
                     </f:facet>
                     <h:outputText value="#{c.registrationNumber}" />
+                </p:column>
+
+                <p:column id="isInsured">
+                    <f:facet name="header">
+                        Is insured
+                    </f:facet>
+                    <h:outputText value="#{insuranceView.isCarplateInsured(c.id)}" />
+                </p:column>
+
+                <p:column headerText="insurance">
+                    <p:commandButton icon="ui-icon-search"
+                                     process="@this"
+                                     update=":insuranceForm"
+                                     oncomplete="insur.show()">
+                        <f:setPropertyActionListener value="#{c}" target="#{globalView.carPlate}"/>
+                    </p:commandButton>
                 </p:column>
 
                 <p:column headerText="details">

@@ -16,10 +16,25 @@
     </properties>
   </persistence-unit>
   
-  <persistence-unit name="INS" transaction-type="JTA">
-    <description>INS</description>
+  <persistence-unit name="INSPZU" transaction-type="JTA">
+    <description>INSPZU</description>
     <provider>org.hibernate.ejb.HibernatePersistence</provider>
-    <jta-data-source>java:jboss/datasources/INSSX</jta-data-source>
+    <jta-data-source>java:jboss/datasources/INSPZU</jta-data-source>
+    <exclude-unlisted-classes>false</exclude-unlisted-classes>
+    <properties>
+      <!--<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQL82Dialect"/>-->
+      <!--<property name="hibernate.hbm2ddl.auto" value="update"/>-->
+      <property name="hibernate.show_sql" value="true"/>
+      <property name="hibernate.format_sql" value="false"/>
+      <property name="hibernate.transaction.flush_before_completion" value="true"/>
+      <property name="hibernate.id.new_generator_mappings" value="false"/>
+    </properties>
+  </persistence-unit>
+  
+  <persistence-unit name="INSWRT" transaction-type="JTA">
+    <description>INSWRT</description>
+    <provider>org.hibernate.ejb.HibernatePersistence</provider>
+    <jta-data-source>java:jboss/datasources/INSWRT</jta-data-source>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <!--<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQL82Dialect"/>-->

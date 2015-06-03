@@ -3,14 +3,15 @@ DELETE FROM registrationauthorities;
 DELETE FROM owners;
 DELETE FROM carplates;
 DELETE FROM carplates_owners;
-DELETE FROM penalties;
-DELETE FROM insurances;
+--DELETE FROM penalties;
+--DELETE FROM insurances;
 
 INSERT INTO users values
 (1, 'Tomasz', 'Tomaszewski', 'a', 'GLOBAL', 'admin'),
 (2, 'Łukasz', 'Łukasiewicz', 'a', 'LOCAL', 'user1'),
 (3, 'Wojciech', 'Wojciechowski', 'a', 'LOCAL', 'user2'),
-(4, 'Marian', 'Ubezpieczyciel', 'a', 'INSURANCE', 'insur');
+(4, 'Marian', 'Ubezpieczyciel', 'a', 'INSURANCE', 'ins_pzu'),
+(5, 'Józef', 'Doradca', 'a', 'INSURANCE', 'ins_wrt');
 
 INSERT INTO registrationauthorities values
 (1, 'Gdynia', 'Prezydent Miasta Gdyni', '81-382', 'al. J. Piłsudskiego nr 52/54');
@@ -21,7 +22,6 @@ INSERT INTO owners values
 (3, 'Gdynia', 'Bronisław', 'Burzyński', '88300311192', '82-500', 'Pomorska 1/2'),
 (4, 'Gdynia', 'Bolesław', 'Bażyński', '83111009834', '88-400', 'Pomorska 1/2'),
 (5, 'Gdynia', 'Beata', 'Bogusławska', '84119232127', '83-127', 'Chłopska 10/33');
-
 
 INSERT INTO carplates values 
 (1, 'Nissan', 'Patrol', '1992-01-05 00:00:00', '1997-01-05 00:00:00', NULL, 'GA92934', '1M8GDM9AXKP042788', 1),
@@ -46,4 +46,3 @@ INSERT INTO carplates_owners values
 (7, 5),
 (8, 5),
 (9, 5);
-
