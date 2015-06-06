@@ -22,7 +22,8 @@ public class InsurancesManager2 {
 
     public Insurance find(String carplate) {
         Query q = insurancesEntityManager.createQuery(
-            "select i from Insurance i where i.carplate = '" + carplate + "'");
+            "select i from Insurance i where i.carplate = :carplate");
+        q.setParameter("carplate", carplate);
 
         Insurance result;
 

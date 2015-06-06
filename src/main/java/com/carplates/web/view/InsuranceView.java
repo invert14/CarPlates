@@ -2,6 +2,7 @@ package com.carplates.web.view;
 
 import com.carplates.domain.CarPlate;
 import com.carplates.domain.Insurance;
+import com.carplates.domain.Owner;
 import java.io.Serializable;
 import java.util.List;
 

@@ -36,9 +36,9 @@ public class OwnersManager {
             return new ArrayList<Owner>();
         }
 
-        for(Owner o : result) {
-            o.getCarPlates().size();
-        }
+//        for(Owner o : result) {
+//            o.getCarPlates().size();
+//        }
 
         return result;
     }
@@ -62,6 +62,8 @@ public class OwnersManager {
 
         return result;
     }
+    
+    
 
     public void persist(Owner owner) {
         entityManager.persist(owner);

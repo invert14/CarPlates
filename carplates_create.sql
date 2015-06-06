@@ -5,17 +5,7 @@
 --DROP TABLE carplates_owners;
 --DROP TABLE penalties;*/
 
-CREATE TABLE owners
-(
-  id serial,
-  cityaddress character varying(255),
-  firstname character varying(255),
-  lastname character varying(255),
-  pesel character varying(255),
-  postcodeaddress character varying(255),
-  streetaddress character varying(255),
-  CONSTRAINT owners_pkey PRIMARY KEY (id)
-);
+
 
 
 CREATE TABLE registrationauthorities
@@ -60,10 +50,8 @@ CREATE TABLE carplates
 CREATE TABLE carplates_owners
 (
   carplateid bigint UNSIGNED NOT NULL,
-  ownerid bigint UNSIGNED NOT NULL,
-  CONSTRAINT carplates_owners_pkey PRIMARY KEY (carplateid, ownerid),
+  ownerpesel character varying(255),
+  CONSTRAINT carplates_owners_pkey PRIMARY KEY (carplateid, ownerpesel),
   CONSTRAINT fk1f44c72e353268df FOREIGN KEY (carplateid)
-      REFERENCES carplates (id) ON DELETE CASCADE,
-  CONSTRAINT fk1f44c72e3bd348e1 FOREIGN KEY (ownerid)
-      REFERENCES owners (id) ON DELETE CASCADE
+      REFERENCES carplates (id) ON DELETE CASCADE
 );

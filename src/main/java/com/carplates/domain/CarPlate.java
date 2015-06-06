@@ -7,8 +7,7 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * User: sebastianpawlak
- * Date: 23.05.2013
+ * User: sebastianpawlak Date: 23.05.2013
  */
 @Entity
 @Table(name = "carplates")
@@ -21,13 +20,18 @@ public class CarPlate {
     @ManyToOne
     @JoinColumn(name = "registrationAuthorityId")
     private RegistrationAuthority registrationAuthority;
+
+//    @ManyToMany(fetch = FetchType.LAZY)
+//    @JoinTable(
+//            name="carplates_owners",
+//            joinColumns={@JoinColumn(name="carplateid")},
+//            inverseJoinColumns={@JoinColumn(name="ownerid")})
+//    private Set<Owner> owners;
     
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-            name="carplates_owners",
-            joinColumns={@JoinColumn(name="carplateid")},
-            inverseJoinColumns={@JoinColumn(name="ownerid")})
-    private Set<Owner> owners;
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "carplates_owners", joinColumns = @JoinColumn(name = "carplateid"))
+    @Column(name = "ownerpesel")
+    private List<String> pesels;
 
     private String registrationNumber;
 
@@ -59,14 +63,22 @@ public class CarPlate {
         this.registrationAuthority = registrationAuthority;
     }
 
-    public Set<Owner> getOwners() {
-        return owners;
+    
+//    public Set<Owner> getOwners() {
+//        return owners;
+//    }
+//    public void setOwners(Set<Owner> owners) {
+//        this.owners = owners;
+//    }
+
+    public List<String> getPesels() {
+        return pesels;
     }
 
-    public void setOwners(Set<Owner> owners) {
-        this.owners = owners;
+    public void setPesels(List<String> pesels) {
+        this.pesels = pesels;
     }
-
+    
     public String getRegistrationNumber() {
         return registrationNumber;
     }
@@ -123,20 +135,26 @@ public class CarPlate {
         this.registrationExpirationDate = registrationExpirationDate;
     }
 
-    public List<Owner> getOwnersList() {
-        return new ArrayList<Owner>(getOwners());
-    }
-
+//    public List<Owner> getOwnersList() {
+//        return new ArrayList<Owner>(getOwners());
+//    }
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         CarPlate carPlate = (CarPlate) o;
 
-        if (id != null ? !id.equals(carPlate.id) : carPlate.id != null) return false;
-        if (registrationNumber != null ? !registrationNumber.equals(carPlate.registrationNumber) : carPlate.registrationNumber != null)
+        if (id != null ? !id.equals(carPlate.id) : carPlate.id != null) {
             return false;
+        }
+        if (registrationNumber != null ? !registrationNumber.equals(carPlate.registrationNumber) : carPlate.registrationNumber != null) {
+            return false;
+        }
 
         return true;
     }

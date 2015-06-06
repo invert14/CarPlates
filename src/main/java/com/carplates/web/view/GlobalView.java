@@ -164,4 +164,9 @@ public class GlobalView implements Serializable {
 
         return null;
     }
+    
+    public List<Owner> getOwnersForCarplate(CarPlate carplate) {
+        System.out.println("HEEEEEEEEEEEEEEEEEJAAAAAAAAAAAAAAAAAA");
+        return globalManager.getAllOwnersForCarPlate(carplate);
+    }
 }

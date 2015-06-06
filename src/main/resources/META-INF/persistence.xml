@@ -76,6 +76,36 @@
     </properties>
   </persistence-unit>
   
+  <persistence-unit name="OWNGD" transaction-type="JTA">
+    <description>OWNGD</description>
+    <provider>org.hibernate.ejb.HibernatePersistence</provider>
+    <jta-data-source>java:jboss/datasources/OWNGDSX</jta-data-source>
+    <exclude-unlisted-classes>false</exclude-unlisted-classes>
+    <properties>
+      <!--<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQL82Dialect"/>-->
+      <!--<property name="hibernate.hbm2ddl.auto" value="update"/>-->
+      <property name="hibernate.show_sql" value="true"/>
+      <property name="hibernate.format_sql" value="false"/>
+      <property name="hibernate.transaction.flush_before_completion" value="true"/>
+      <property name="hibernate.id.new_generator_mappings" value="false"/>
+    </properties>
+  </persistence-unit>
+  
+  <persistence-unit name="OWNGA" transaction-type="JTA">
+    <description>OWNGA</description>
+    <provider>org.hibernate.ejb.HibernatePersistence</provider>
+    <jta-data-source>java:jboss/datasources/OWNGASX</jta-data-source>
+    <exclude-unlisted-classes>false</exclude-unlisted-classes>
+    <properties>
+      <!--<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQL82Dialect"/>-->
+      <!--<property name="hibernate.hbm2ddl.auto" value="update"/>-->
+      <property name="hibernate.show_sql" value="true"/>
+      <property name="hibernate.format_sql" value="false"/>
+      <property name="hibernate.transaction.flush_before_completion" value="true"/>
+      <property name="hibernate.id.new_generator_mappings" value="false"/>
+    </properties>
+  </persistence-unit>
+  
   <persistence-unit name="GSP" transaction-type="JTA">
     <description>GSP</description>
     <provider>org.hibernate.ejb.HibernatePersistence</provider>

@@ -38,9 +38,9 @@ public class CarPlatesManager {
             return new ArrayList<CarPlate>();
         }
 
-        for(CarPlate c : result) {
-            c.getOwners().size();
-        }
+//        for(CarPlate c : result) {
+//            c.getOwners().size();
+//        }
 
         return result;
     }

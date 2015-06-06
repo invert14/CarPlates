@@ -22,67 +22,63 @@ import com.carplates.domain.Owner;
 import com.ocpsoft.shade.org.apache.commons.beanutils.BeanUtils;
 
 /**
- * User: sebastianpawlak
- * Date: 24.05.2013
+ * User: sebastianpawlak Date: 24.05.2013
  */
-
 @Stateless
 public class GlobalManager {
 
     @PersistenceContext(unitName = "GD")
-    EntityManager entityManagerGD;
+    EntityManager carplateEntityManagerGD;
 
     @PersistenceContext(unitName = "GA")
-    EntityManager entityManagerGA;
+    EntityManager carplateEntityManagerGA;
 
-    @PersistenceContext(unitName = "GSP")
-    EntityManager entityManagerGSP;
+    @PersistenceContext(unitName = "OWNGD")
+    EntityManager ownerEntityManagerGD;
+
+    @PersistenceContext(unitName = "OWNGA")
+    EntityManager ownerEntityManagerGA;
 
 //    List<EntityManager> allManagers;
-    
-    Map<String, EntityManager> allManagers;
+    Map<String, EntityManager> ownerManagers;
+    Map<String, EntityManager> carplatesManagers;
 
     @PostConstruct
     public void init() {
 
-        allManagers = new HashMap<String, EntityManager>();
-        allManagers.put("GD", entityManagerGD);
-        allManagers.put("GA", entityManagerGA);
-//        allManagers.put("GSP", entityManagerGSP);
+        carplatesManagers = new HashMap<String, EntityManager>();
+        carplatesManagers.put("GD", carplateEntityManagerGD);
+        carplatesManagers.put("GA", carplateEntityManagerGA);
+
+        ownerManagers = new HashMap<String, EntityManager>();
+        ownerManagers.put("GD", ownerEntityManagerGD);
+        ownerManagers.put("GA", ownerEntityManagerGA);
 
     }
 
     public List<Owner> getAllOwners() {
 
         String queryString = ("SELECT o FROM Owner o");
-
         List<Owner> results = new LinkedList<Owner>();
-
-        for(java.util.Map.Entry<String, EntityManager> em : allManagers.entrySet()) {
-
+        for (java.util.Map.Entry<String, EntityManager> em : ownerManagers.entrySet()) {
             Query q = em.getValue().createQuery(queryString);
-
             List<Owner> res = q.getResultList();
-            
-            for(Owner o : res) {
-            	o.setRegion(em.getKey());
+            for (Owner o : res) {
+                o.setRegion(em.getKey());
             }
-            
             results.addAll(res);
         }
 
-        for(Owner o : results) {
-            o.getCarPlates().size();
-        }
-
-
+//        for (Owner o : results) {
+//            o.getCarPlates().size();
+//        }
 
         return mergeOwners(results);
 
     }
-    
+
     public Owner getOwnerByIdAndRegion(Long id, String region) {
-    	Query q = allManagers.get(region).createQuery("select o from Owner o where o.id=:id");
+        Query q = ownerManagers.get(region).createQuery("select o from Owner o where o.id=:id");
         q.setParameter("id", id);
         Owner result;
         try {
@@ -96,23 +92,51 @@ public class GlobalManager {
         return result;
     }
 
+    public Owner getOwnerByPesel(String pesel) {
+        Owner result;
+        for (java.util.Map.Entry<String, EntityManager> em : ownerManagers.entrySet()) {
+            Query q = em.getValue().createQuery("select o from Owner o where o.pesel=:pesel");
+            q.setParameter("pesel", pesel);
+            try {
+                result = (Owner) q.getSingleResult();
+            } catch (Exception e) {
+                System.out.println("Error" + e.getMessage());
+                result = null;
+            }
+            if (result != null)
+                return result;
+        }
+
+        return null;
+    }
+    
+    public List<Owner> getAllOwnersForCarPlate(CarPlate carplate) {
+        List<String> pesels = carplate.getPesels();
+        List<Owner> owners = new ArrayList<Owner>();
+        for (String pesel : pesels) {
+            Owner owner = getOwnerByPesel(pesel);
+            if (owner != null)
+                owners.add(owner);
+        }
+        return owners;
+    }
+
     public List<CarPlate> getAllCarPlates() {
 
         String queryString = ("SELECT c FROM CarPlate c");
 
         List<CarPlate> results = new LinkedList<CarPlate>();
 
-        for(EntityManager em : allManagers.values()) {
+        for (EntityManager em : carplatesManagers.values()) {
 
             Query q = em.createQuery(queryString);
 
             results.addAll(q.getResultList());
         }
 
-        for(CarPlate c : results) {
-            c.getOwners().size();
-        }
-
+//        for(CarPlate c : results) {
+//            c.getOwners().size();
+//        }
         return results;
     }
 
@@ -120,15 +144,13 @@ public class GlobalManager {
 
         List<Owner> results = new ArrayList<Owner>();
 
-
         Collections.sort(owners, ownerPeselComparator);
 
         List<Owner> ownersToMerge = new ArrayList<Owner>();
-        String lastPesel="";
+        String lastPesel = "";
 
         for (Owner owner : owners) {
 //    System.out.println(owner.getFirstName() + owner.getLastName());
-
 
             if (lastPesel.equals("")) {
 //                System.out.println("1");
@@ -159,7 +181,7 @@ public class GlobalManager {
             }
         }
 
-        if(!lastPesel.equals("")) {
+        if (!lastPesel.equals("")) {
             System.out.println("X");
             if (ownersToMerge.size() == 1) {
                 System.out.println("XA");
@@ -188,11 +210,11 @@ public class GlobalManager {
             e.printStackTrace();
         }
 
-        for(Owner o : owners) {
-            resultsCarPlates.addAll(o.getCarPlates());
-        }
-
-        result.setCarPlates(resultsCarPlates);
+//        for (Owner o : owners) {
+//            resultsCarPlates.addAll(o.getCarPlates());
+//        }
+//
+//        result.setCarPlates(resultsCarPlates);
 
         return result;
     }
@@ -200,11 +222,11 @@ public class GlobalManager {
     private Comparator<Owner> ownerPeselComparator = new Comparator<Owner>() {
         @Override
         public int compare(Owner o1, Owner o2) {
-            if(o1 == null || o2 == null) {
+            if (o1 == null || o2 == null) {
                 return -1;
             }
 
-            if(o1.getPesel() == null || o2.getPesel() == null) {
+            if (o1.getPesel() == null || o2.getPesel() == null) {
                 return -1;
             }
 
@@ -215,12 +237,12 @@ public class GlobalManager {
     private Comparator<Owner> nameLastNameComparator = new Comparator<Owner>() {
         @Override
         public int compare(Owner o1, Owner o2) {
-            if(o1.getLastName().compareTo(o2.getLastName()) == 0) {
-                return o1.getFirstName().compareTo(o2.getFirstName()) ;
+            if (o1.getLastName().compareTo(o2.getLastName()) == 0) {
+                return o1.getFirstName().compareTo(o2.getFirstName());
             }
 
             return o1.getLastName().compareTo(o2.getLastName());
-                   }
+        }
     };
 
 }

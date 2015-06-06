@@ -36,8 +36,8 @@ public class Owner {
         return "" + id + ";" + region;
     }
 
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "owners")
-    private Set<CarPlate> carPlates;
+//    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "owners")
+//    private Set<CarPlate> carPlates;
 
     public Long getId() {
         return id;
@@ -95,16 +95,17 @@ public class Owner {
         this.streetAddress = streetAddress;
     }
 
-    public Set<CarPlate> getCarPlates() {
-        return carPlates;
-    }
-
-    public void setCarPlates(Set<CarPlate> carPlates) {
-        this.carPlates = carPlates;
-    }
+//    public Set<CarPlate> getCarPlates() {
+//        return carPlates;
+//    }
+//
+//    public void setCarPlates(Set<CarPlate> carPlates) {
+//        this.carPlates = carPlates;
+//    }
 
     public List<CarPlate> getCarPlatesList() {
-        return new ArrayList<CarPlate>(getCarPlates());
+        return new ArrayList<CarPlate>();
+//        return new ArrayList<CarPlate>(getCarPlates());
     }
 
     public String getRegion() {

@@ -8,7 +8,7 @@
         <h:outputStylesheet library="css" name="common.css" />
     </ui:define>
     <ui:define name="contentBody">
-        <h:form id="windowForm">
+<!--        <h:form id="windowForm">
 
             <p:dialog id="deatilsDialog"
                       header="Details"
@@ -83,7 +83,7 @@
 
             </p:dialog>
 
-        </h:form>
+        </h:form>-->
 
         <h:form>
 
@@ -154,14 +154,14 @@
                     <h:outputText value="#{o.streetAddress}" />
                 </p:column>
 
-                <p:column headerText="details">
+<!--                <p:column headerText="details">
                     <p:commandButton icon="ui-icon-search"
                                      process="@this"
                                      update=":windowForm"
                                      oncomplete="dets.show()">
                         <f:setPropertyActionListener value="#{o}" target="#{globalView.owner}"/>
                     </p:commandButton>
-                </p:column>
+                </p:column>-->
 
             </p:dataTable>
         </h:form>

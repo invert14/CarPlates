@@ -68,8 +68,8 @@ public class CarPlatesView implements Serializable {
         try {
             mode = Mode.EDIT;
             carPlate = carPlatesManager.getCarPlateById(carPlateId.get());
-            ownersForAddEdit = new ArrayList<Owner>(carPlate.getOwners());
-            carPlate.getOwners().size();
+//            ownersForAddEdit = new ArrayList<Owner>(carPlate.getOwners());
+//            carPlate.getOwners().size();
 
         } catch (Exception e) {
             System.out.println("ERROR " + e.getMessage());
@@ -78,14 +78,14 @@ public class CarPlatesView implements Serializable {
     }
 
     public void saveNew() {
-        carPlate.setOwners(new HashSet<Owner>(ownersForAddEdit));
+//        carPlate.setOwners(new HashSet<Owner>(ownersForAddEdit));
         carPlatesManager.persist(carPlate);
         redirect("/faces/local/carplates-view.xhtml");
     }
 
     public void edit() {
         //carPlate = carPlatesManager.getCarPlateById(carPlate.getId());
-        carPlate.setOwners(new HashSet<Owner>(ownersForAddEdit));
+//        carPlate.setOwners(new HashSet<Owner>(ownersForAddEdit));
         carPlate = carPlatesManager.merge(carPlate);
         redirect("/faces/local/carplates-view.xhtml");
     }

@@ -17,50 +17,50 @@
                       resizable="true"
                       showEffect="puff"
                       hideEffect="puff">
-                    <p:dataTable id="dataTable" var="o" value="#{globalView.carPlate.ownersList}" widgetVar="ownersTable"
-                                 emptyMessage="No owners found with given criteria" filteredValue="#{globalView.filteredOwners}">
+                <p:dataTable id="dataTable" var="o" value="#{globalView.getOwnersForCarplate(globalView.carPlate)}" widgetVar="ownersTable"
+                             emptyMessage="No owners found with given criteria" filteredValue="#{globalView.filteredOwners}">
 
-                        <f:facet name="header">
+                    <f:facet name="header">
 
-                        </f:facet>
+                    </f:facet>
 
-                        <p:column id="nameColumn" filterBy="#{o.firstName}"
-                                  headerText="First Name"
-                                  filterMatchMode="startsWith">
-                            <h:outputText value="#{o.firstName}" />
-                        </p:column>
+                    <p:column id="nameColumn" filterBy="#{o.firstName}"
+                              headerText="First Name"
+                              filterMatchMode="startsWith">
+                        <h:outputText value="#{o.firstName}" />
+                    </p:column>
 
-                        <p:column id="lastNameColumn" filterBy="#{o.lastName}"
-                                  headerText="Last Name"
-                                  filterMatchMode="startsWith">
-                            <h:outputText value="#{o.lastName}" />
-                        </p:column>
+                    <p:column id="lastNameColumn" filterBy="#{o.lastName}"
+                              headerText="Last Name"
+                              filterMatchMode="startsWith">
+                        <h:outputText value="#{o.lastName}" />
+                    </p:column>
 
-                        <p:column id="peselColumn" filterBy="#{o.pesel}"
-                                  headerText="PESEL"
-                                  filterMatchMode="startsWith">
-                            <h:outputText value="#{o.pesel}" />
-                        </p:column>
+                    <p:column id="peselColumn" filterBy="#{o.pesel}"
+                              headerText="PESEL"
+                              filterMatchMode="startsWith">
+                        <h:outputText value="#{o.pesel}" />
+                    </p:column>
 
-                        <p:column id="cityColumn" filterBy="#{o.cityAddress}"
-                                  headerText="City"
-                                  filterMatchMode="startsWith">
-                            <h:outputText value="#{o.cityAddress}" />
-                        </p:column>
+                    <p:column id="cityColumn" filterBy="#{o.cityAddress}"
+                              headerText="City"
+                              filterMatchMode="startsWith">
+                        <h:outputText value="#{o.cityAddress}" />
+                    </p:column>
 
-                        <p:column id="postcodeColumn" filterBy="#{o.postCodeAddress}"
-                                  headerText="Post code"
-                                  filterMatchMode="startsWith">
-                            <h:outputText value="#{o.postCodeAddress}" />
-                        </p:column>
+                    <p:column id="postcodeColumn" filterBy="#{o.postCodeAddress}"
+                              headerText="Post code"
+                              filterMatchMode="startsWith">
+                        <h:outputText value="#{o.postCodeAddress}" />
+                    </p:column>
 
-                        <p:column id="streetColumn" filterBy="#{o.streetAddress}"
-                                  headerText="Street"
-                                  filterMatchMode="startsWith">
-                            <h:outputText value="#{o.streetAddress}" />
-                        </p:column>
+                    <p:column id="streetColumn" filterBy="#{o.streetAddress}"
+                              headerText="Street"
+                              filterMatchMode="startsWith">
+                        <h:outputText value="#{o.streetAddress}" />
+                    </p:column>
 
-                    </p:dataTable>
+                </p:dataTable>
             </p:dialog>
 
         </h:form>
@@ -172,12 +172,12 @@
                     <h:outputText value="#{c.registrationNumber}" />
                 </p:column>
 
-                <p:column id="isInsured">
+<!--                <p:column id="isInsured">
                     <f:facet name="header">
                         Is insured
                     </f:facet>
                     <h:outputText value="#{insuranceView.isCarplateInsured(c.registrationNumber)}" />
-                </p:column>
+                </p:column>-->
 
                 <p:column headerText="insurance">
                     <p:commandButton icon="ui-icon-search"

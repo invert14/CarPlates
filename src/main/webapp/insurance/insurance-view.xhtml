@@ -9,9 +9,11 @@
     </ui:define>
 
     <ui:define name="contentBody">
-        
-        <h:outputText value="#{insuranceView.currentTime}"/>
-        
+
+<!--        <p:button href="/faces/insurance/insurance-creator.xhtml"
+                  value="Add new"
+                  style="float: left;" rendered="#{userSession.insurance}"/>-->
+
         <p:dataTable id="dataTable" var="i" value="#{insuranceView.insurances}" widgetVar="insurancesTable"
                      emptyMessage="No insurances found!">
 

@@ -120,14 +120,14 @@
                     </h:outputText>
                 </p:column>
 
-                <p:column headerText="details">
+<!--                <p:column headerText="details">
                     <p:commandButton icon="ui-icon-search"
                                      process="@this"
                                      update=":windowForm"
                                      oncomplete="dets.show()">
                         <f:setPropertyActionListener value="#{c}" target="#{penaltyView.penalty}"/>
                     </p:commandButton>
-                </p:column>
+                </p:column>-->
                 
                 <p:column headerText="edit" style="text-align: center;">
                 	<p:button href="/faces/global/penalty-creator.xhtml?penaltyId=#{c.id}"
