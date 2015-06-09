@@ -3,11 +3,9 @@ package com.carplates.web.view;
 import com.carplates.domain.Insurance;
 import com.carplates.ejb.CarPlatesManager;
 import com.carplates.ejb.InsurancesManager;
-import com.carplates.ejb.InsurancesManager2;
 import com.carplates.web.view.session.UserSession;
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -22,8 +20,6 @@ public class InsuranceView implements Serializable {
 
     @Inject
     private InsurancesManager insurancesManager;
-    @Inject
-    private InsurancesManager2 insurancesManager2;
 
     @Inject
     private CarPlatesManager carPlatesManager;
@@ -35,21 +31,11 @@ public class InsuranceView implements Serializable {
         if (!userSession.isInsurance()) {
             return new LinkedList<Insurance>();
         }
-        String username = userSession.getLoggedInUser().getUsername();
-        if (username.equals("ins_pzu")) {
-            return insurancesManager.findAll();
-        } else if (username.equals("ins_wrt")) {
-            return insurancesManager2.findAll();
-        }
-        return new ArrayList<Insurance>();
+        return insurancesManager.findAll();
     }
 
     public Boolean isCarplateInsured(String carplate) {
         Insurance i = insurancesManager.find(carplate);
-        if (i == null) {
-            i = insurancesManager2.find(carplate);
-        }
-
         if (i == null) {
             return false;
         }
