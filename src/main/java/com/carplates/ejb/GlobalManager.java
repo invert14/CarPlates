@@ -139,6 +139,21 @@ public class GlobalManager {
         return results;
     }
 
+    public CarPlate getCarPlateByNumber(String number) {
+        for (EntityManager em : carplatesManagers.values()) {
+            Query q = em.createQuery("SELECT c FROM CarPlate c WHERE c.registrationNumber = :number");
+            q.setParameter("number", number);
+
+            try {
+                return (CarPlate) q.getSingleResult();
+            } catch (Exception e) {
+                System.out.println("Error" + e.getMessage());
+            }
+        }
+
+        return null;
+    }
+
     private List<Owner> mergeOwners(List<Owner> owners) {
 
         List<Owner> results = new ArrayList<Owner>();

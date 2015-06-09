@@ -29,6 +29,11 @@
                         url="/global/owners-view.xhtml"
                         icon="ui-icon-person"/>
             
+            <p:menuitem value="Search CarPlate"
+                        rendered="#{userSession.global}"
+                        url="/global/carplates-search.xhtml"
+                        icon="ui-icon-key"/>
+
             <p:menuitem value="All Insurances"
                         rendered="#{userSession.insurance}"
                         url="/insurance/insurance-view.xhtml"

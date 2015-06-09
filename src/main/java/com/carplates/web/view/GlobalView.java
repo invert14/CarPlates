@@ -169,4 +169,8 @@ public class GlobalView implements Serializable {
         System.out.println("HEEEEEEEEEEEEEEEEEJAAAAAAAAAAAAAAAAAA");
         return globalManager.getAllOwnersForCarPlate(carplate);
     }
+
+    public void setCarPlateByNumber(String number) {
+        this.carPlate = globalManager.getCarPlateByNumber(number);
+    }
 }
