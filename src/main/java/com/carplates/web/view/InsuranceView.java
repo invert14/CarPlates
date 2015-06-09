@@ -35,11 +35,14 @@ public class InsuranceView implements Serializable {
     }
 
     public Boolean isCarplateInsured(String carplate) {
-        Insurance i = insurancesManager.find(carplate);
-        if (i == null) {
-            return false;
+        Boolean insured = false;
+        for (Insurance i : insurancesManager.findByCarplate(carplate)) {
+            if (i.isValid()) {
+                insured = true;
+                break;
+            }
         }
-        return i.isValid();
+        return insured;
     }
 
     public String getCurrentTime() {

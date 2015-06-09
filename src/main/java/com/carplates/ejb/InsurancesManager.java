@@ -2,6 +2,7 @@ package com.carplates.ejb;
 
 import com.carplates.domain.Insurance;
 import com.carplates.web.view.session.UserSession;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -48,7 +49,8 @@ public class InsurancesManager {
         return results;
     }
 
-    public Insurance find(String carplate) {
+    public List<Insurance> findByCarplate(String carplate) {
+        List<Insurance> insurances = new ArrayList<Insurance>();
         for (java.util.Map.Entry<String, EntityManager> em : insurancesManagers.entrySet()) {
             Query q = em.getValue().createQuery("select i from Insurance i where i.carplate = :carplate");
             q.setParameter("carplate", carplate);
@@ -63,10 +65,10 @@ public class InsurancesManager {
             }
 
             if (result != null) {
-                return result;
+                insurances.add(result);
             }
         }
-        return null;
+        return insurances;
     }
 
     public void persist(Insurance insurance) {
