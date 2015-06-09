@@ -28,7 +28,7 @@ public class InsurancesManager2 {
         Insurance result;
 
         try {
-            result = (Insurance)q.getSingleResult();
+            result = (Insurance) q.getSingleResult();
         } catch (Exception e) {
             System.out.println("Error" + e.getMessage());
             return null;

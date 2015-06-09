@@ -1,5 +1,8 @@
 package com.carplates.ejb;
 
+import com.carplates.domain.CarPlate;
+import com.carplates.domain.Owner;
+import com.ocpsoft.shade.org.apache.commons.beanutils.BeanUtils;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -10,16 +13,11 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
 import javax.annotation.PostConstruct;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-
-import com.carplates.domain.CarPlate;
-import com.carplates.domain.Owner;
-import com.ocpsoft.shade.org.apache.commons.beanutils.BeanUtils;
 
 /**
  * User: sebastianpawlak Date: 24.05.2013
@@ -72,7 +70,6 @@ public class GlobalManager {
 //        for (Owner o : results) {
 //            o.getCarPlates().size();
 //        }
-
         return mergeOwners(results);
 
     }
@@ -103,20 +100,22 @@ public class GlobalManager {
                 System.out.println("Error" + e.getMessage());
                 result = null;
             }
-            if (result != null)
+            if (result != null) {
                 return result;
+            }
         }
 
         return null;
     }
-    
+
     public List<Owner> getAllOwnersForCarPlate(CarPlate carplate) {
         List<String> pesels = carplate.getPesels();
         List<Owner> owners = new ArrayList<Owner>();
         for (String pesel : pesels) {
             Owner owner = getOwnerByPesel(pesel);
-            if (owner != null)
+            if (owner != null) {
                 owners.add(owner);
+            }
         }
         return owners;
     }
@@ -215,7 +214,6 @@ public class GlobalManager {
 //        }
 //
 //        result.setCarPlates(resultsCarPlates);
-
         return result;
     }
 

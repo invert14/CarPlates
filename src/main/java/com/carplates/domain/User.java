@@ -1,12 +1,17 @@
 package com.carplates.domain;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
- * User: sebastianpawlak
- * Date: 21.05.2013
+ * User: sebastianpawlak Date: 21.05.2013
  */
-
 @Entity
 @Table(name = "users")
 public class User {
@@ -81,12 +86,18 @@ public class User {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         User user = (User) o;
 
-        if (id != null ? !id.equals(user.id) : user.id != null) return false;
+        if (id != null ? !id.equals(user.id) : user.id != null) {
+            return false;
+        }
 
         return true;
     }

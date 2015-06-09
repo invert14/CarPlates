@@ -3,8 +3,7 @@ package com.carplates.security;
 import org.picketlink.idm.api.User;
 
 /**
- * User: sebastianpawlak
- * Date: 12.03.2013
+ * User: sebastianpawlak Date: 12.03.2013
  */
 public class UserImpl implements User {
 

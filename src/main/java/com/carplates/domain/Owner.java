@@ -1,9 +1,13 @@
 package com.carplates.domain;
 
-import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.Set;
 import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 
 /**
  * User: sebastianpawlak Date: 23.05.2013
@@ -38,7 +42,6 @@ public class Owner {
 
 //    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "owners")
 //    private Set<CarPlate> carPlates;
-
     public Long getId() {
         return id;
     }
@@ -102,7 +105,6 @@ public class Owner {
 //    public void setCarPlates(Set<CarPlate> carPlates) {
 //        this.carPlates = carPlates;
 //    }
-
     public List<CarPlate> getCarPlatesList() {
         return new ArrayList<CarPlate>();
 //        return new ArrayList<CarPlate>(getCarPlates());

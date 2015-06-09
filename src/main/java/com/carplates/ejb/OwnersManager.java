@@ -1,36 +1,32 @@
 package com.carplates.ejb;
 
 import com.carplates.domain.Owner;
-import com.carplates.domain.User;
-
+import java.util.ArrayList;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.enterprise.inject.Default;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-import java.util.*;
 
 /**
- * User: sebastianpawlak
- * Date: 23.05.2013
+ * User: sebastianpawlak Date: 23.05.2013
  */
-
 @Stateless
 public class OwnersManager {
 
-    @Inject @Default
+    @Inject
+    @Default
     EntityManager entityManager;
 
-    public List<Owner> getOwners(){
+    public List<Owner> getOwners() {
 
-        Query q = entityManager.createQuery
-                ("select o from Owner o");
-
+        Query q = entityManager.createQuery("select o from Owner o");
 
         List<Owner> result;
 
         try {
-            result =  q.getResultList();
+            result = q.getResultList();
         } catch (Exception e) {
             System.out.println("Error" + e.getMessage());
             return new ArrayList<Owner>();
@@ -39,15 +35,12 @@ public class OwnersManager {
 //        for(Owner o : result) {
 //            o.getCarPlates().size();
 //        }
-
         return result;
     }
 
+    public Owner getOwnerById(Long id) {
 
-    public Owner getOwnerById(Long id){
-
-        Query q = entityManager.createQuery
-                ("select o from Owner o where o.id=:id");
+        Query q = entityManager.createQuery("select o from Owner o where o.id=:id");
 
         q.setParameter("id", id);
 
@@ -62,8 +55,6 @@ public class OwnersManager {
 
         return result;
     }
-    
-    
 
     public void persist(Owner owner) {
         entityManager.persist(owner);
@@ -72,6 +63,5 @@ public class OwnersManager {
     public Owner merge(Owner owner) {
         return entityManager.merge(owner);
     }
-
 
 }

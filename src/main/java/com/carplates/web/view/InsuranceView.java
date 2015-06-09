@@ -1,23 +1,19 @@
 package com.carplates.web.view;
 
-import com.carplates.domain.CarPlate;
 import com.carplates.domain.Insurance;
-import com.carplates.domain.Owner;
-import java.io.Serializable;
-import java.util.List;
-
-import javax.faces.bean.ViewScoped;
-import javax.inject.Inject;
-import javax.inject.Named;
-
 import com.carplates.ejb.CarPlatesManager;
 import com.carplates.ejb.InsurancesManager;
 import com.carplates.ejb.InsurancesManager2;
 import com.carplates.web.view.session.UserSession;
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedList;
+import java.util.List;
+import javax.faces.bean.ViewScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
 
 @SuppressWarnings("serial")
 @Named

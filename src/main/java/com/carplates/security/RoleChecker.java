@@ -1,15 +1,13 @@
 package com.carplates.security;
 
 import com.carplates.web.view.session.UserSession;
+import javax.inject.Inject;
 import org.apache.log4j.Logger;
 import org.jboss.seam.security.Identity;
 import org.jboss.seam.security.annotations.Secures;
 
-import javax.inject.Inject;
-
 /**
- * User: sebastianpawlak
- * Date: 05.06.2013
+ * User: sebastianpawlak Date: 05.06.2013
  */
 public class RoleChecker {
 
@@ -18,7 +16,9 @@ public class RoleChecker {
     @Inject
     private UserSession userSession;
 
-    public @Secures @Local boolean localCheck(Identity identity) {
+    public @Secures
+    @Local
+    boolean localCheck(Identity identity) {
 
         if (identity == null || identity.getUser() == null) {
 
@@ -31,7 +31,9 @@ public class RoleChecker {
 
     }
 
-    public @Secures @Global boolean globalCheck(Identity identity) {
+    public @Secures
+    @Global
+    boolean globalCheck(Identity identity) {
 
         if (identity == null || identity.getUser() == null) {
 
@@ -42,8 +44,10 @@ public class RoleChecker {
         }
 
     }
-    
-    public @Secures @InsuranceRole boolean insuranceCheck(Identity identity) {
+
+    public @Secures
+    @InsuranceRole
+    boolean insuranceCheck(Identity identity) {
 
         if (identity == null || identity.getUser() == null) {
 

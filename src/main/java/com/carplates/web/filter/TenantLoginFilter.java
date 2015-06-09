@@ -1,27 +1,25 @@
 package com.carplates.web.filter;
 
 import com.carplates.domain.Tenant;
-import com.carplates.web.qualifier.Active;
-import com.carplates.web.qualifier.Possible;
 import com.carplates.web.view.session.TenantSession;
-
-import javax.enterprise.inject.Instance;
-import javax.inject.Inject;
-import javax.inject.Named;
-import javax.servlet.*;
-import javax.servlet.annotation.WebFilter;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 import java.util.StringTokenizer;
+import javax.enterprise.inject.Instance;
+import javax.servlet.Filter;
+import javax.servlet.FilterChain;
+import javax.servlet.FilterConfig;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
-import org.jboss.seam.security.Identity;
 import org.jboss.seam.security.IdentityImpl;
 
 /**
- * User: sebastianpawlak
- * Date: 01.03.2013
+ * User: sebastianpawlak Date: 01.03.2013
  */
 //@WebFilter(filterName = "TenantLoginFilter", urlPatterns = {"/login/*"})
 public class TenantLoginFilter implements Filter {
@@ -51,7 +49,7 @@ public class TenantLoginFilter implements Filter {
 
         Tenant tenantFromURI = getTenantFromURI(request.getRequestURI(), request.getContextPath());
 
-        if(!possibleTenants.contains(tenantFromURI) || identity.get().isLoggedIn()) {
+        if (!possibleTenants.contains(tenantFromURI) || identity.get().isLoggedIn()) {
             response.sendError(404);
             return;
         }
@@ -76,12 +74,12 @@ public class TenantLoginFilter implements Filter {
         StringTokenizer st = new StringTokenizer(uri, "/");
         String contextPathWithoutSlash = contextPath.replaceAll("/", "");
 
-        while(st.hasMoreElements()) {
+        while (st.hasMoreElements()) {
             String element = st.nextToken();
 
             if (contextPathWithoutSlash.equals(element)) {
 
-                if(st.hasMoreElements()) {
+                if (st.hasMoreElements()) {
                     return new Tenant(st.nextToken());
                 }
                 return null;
@@ -93,9 +91,9 @@ public class TenantLoginFilter implements Filter {
 
     private String removeTenantFromURI(String contextPath, String servletPath, Tenant tenant) {
 
-        String result =  servletPath;
+        String result = servletPath;
 
-        result = result.replaceAll( "/" + tenant.getName(), "");
+        result = result.replaceAll("/" + tenant.getName(), "");
 
         return result;
     }

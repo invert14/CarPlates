@@ -1,19 +1,13 @@
 package com.carplates.ejb;
 
-import javax.annotation.Resource;
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Default;
-import javax.enterprise.inject.Instance;
 import javax.enterprise.inject.Produces;
-import javax.faces.bean.ManagedProperty;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
-import javax.servlet.ServletContext;
 
 /**
- * User: sebastianpawlak
- * Date: 23.05.2013
+ * User: sebastianpawlak Date: 23.05.2013
  */
 @ApplicationScoped
 public class EntityManagerProvider {
@@ -30,15 +24,17 @@ public class EntityManagerProvider {
     //@Resource(name = "region")
     private String region = "GA";
 
-    @Produces @Default EntityManager getEntityManager() {
+    @Produces
+    @Default
+    EntityManager getEntityManager() {
 
-        if("GA".equals(region)) {
+        if ("GA".equals(region)) {
             return GA;
         }
-        if("GD".equals(region)) {
+        if ("GD".equals(region)) {
             return GD;
         }
-        if("GSP".equals(region)) {
+        if ("GSP".equals(region)) {
             return GSP;
         }
         return null;

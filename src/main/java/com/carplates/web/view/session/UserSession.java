@@ -1,15 +1,14 @@
 package com.carplates.web.view.session;
 
+import com.carplates.domain.User;
+import com.carplates.domain.UserRoleType;
+import java.io.Serializable;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
-import java.io.Serializable;
-import com.carplates.domain.*;
 
 /**
- * User: sebastianpawlak
- * Date: 05.06.2013
+ * User: sebastianpawlak Date: 05.06.2013
  */
-
 @SessionScoped
 @Named
 public class UserSession implements Serializable {
@@ -30,7 +29,7 @@ public class UserSession implements Serializable {
 
     public boolean isLocal() {
 
-        if(!isUserLoggedIn()) {
+        if (!isUserLoggedIn()) {
             return false;
         }
 
@@ -40,7 +39,7 @@ public class UserSession implements Serializable {
 
     public boolean isGlobal() {
 
-        if(!isUserLoggedIn()) {
+        if (!isUserLoggedIn()) {
             return false;
         }
 
@@ -49,11 +48,11 @@ public class UserSession implements Serializable {
     }
 
     public boolean isInsurance() {
-        
+
         if (!isUserLoggedIn()) {
             return false;
         }
-        
+
         return loggedInUser.getUserRole().equals(UserRoleType.INSURANCE);
     }
 }

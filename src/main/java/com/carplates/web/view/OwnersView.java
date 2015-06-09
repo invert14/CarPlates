@@ -1,28 +1,27 @@
 package com.carplates.web.view;
 
-import com.carplates.domain.*;
-import com.carplates.ejb.*;
+import com.carplates.domain.Comparer;
+import com.carplates.domain.Owner;
+import com.carplates.ejb.OwnersManager;
 import com.carplates.web.view.session.UserSession;
-import org.jboss.solder.servlet.http.RequestParam;
-
+import java.io.IOException;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
-import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Instance;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
-import java.io.IOException;
-import java.io.Serializable;
-import java.util.*;
+import org.jboss.solder.servlet.http.RequestParam;
 
 /**
- * User: sebastianpawlak
- * Date: 23.05.2013
+ * User: sebastianpawlak Date: 23.05.2013
  */
-
 @Named
 @ViewScoped
 public class OwnersView implements Serializable {
@@ -39,17 +38,16 @@ public class OwnersView implements Serializable {
     @Inject
     private UserSession userSession;
 
-
     private Owner owner;
 
     private Mode mode;
 
     private Boolean orderAscending = Boolean.TRUE;
     private String fieldName = "firstName";
-    
+
     @PostConstruct
     public void init() {
-        if(ownerId.get() == null || ownerId.get() < 1) {
+        if (ownerId.get() == null || ownerId.get() < 1) {
             prepareToAdd();
         } else {
             prepareToEdit();
@@ -88,7 +86,9 @@ public class OwnersView implements Serializable {
 
     public List<Owner> getOwners() {
 
-        if(userSession.isGlobal()) return new ArrayList<Owner>();
+        if (userSession.isGlobal()) {
+            return new ArrayList<Owner>();
+        }
 
         return sort(ownersManager.getOwners());
     }
@@ -136,11 +136,11 @@ public class OwnersView implements Serializable {
 
     }
 
-
     private enum Mode {
-        ADD,EDIT
+
+        ADD, EDIT
     }
-    
+
     private List<Owner> sort(List<Owner> owners) {
         if (owners == null) {
             return null;
@@ -164,7 +164,7 @@ public class OwnersView implements Serializable {
                 } else {
                     result = Comparer.compare(o1.getFirstName(), o2.getFirstName());
                 }
-                if(!orderAscending){
+                if (!orderAscending) {
                     result *= -1;
                 }
                 return result;
@@ -174,7 +174,7 @@ public class OwnersView implements Serializable {
     }
 
     public String sortBy(String fieldName) {
-        
+
         if (this.fieldName.equals(fieldName)) {
             orderAscending = !orderAscending;
         }

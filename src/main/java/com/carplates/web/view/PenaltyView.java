@@ -1,10 +1,15 @@
 package com.carplates.web.view;
 
+import com.carplates.domain.Owner;
+import com.carplates.domain.Penalty;
+import com.carplates.ejb.GlobalManager;
+import com.carplates.ejb.OwnersManager;
+import com.carplates.ejb.PenaltiesManager;
+import com.carplates.web.view.session.UserSession;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Instance;
 import javax.faces.bean.ViewScoped;
@@ -12,15 +17,7 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
-
 import org.jboss.solder.servlet.http.RequestParam;
-
-import com.carplates.domain.Owner;
-import com.carplates.domain.Penalty;
-import com.carplates.ejb.GlobalManager;
-import com.carplates.ejb.OwnersManager;
-import com.carplates.ejb.PenaltiesManager;
-import com.carplates.web.view.session.UserSession;
 
 @SuppressWarnings("serial")
 @Named

@@ -28,14 +28,14 @@ public class InsurancesManager {
         Insurance result;
 
         try {
-            result = (Insurance)q.getSingleResult();
+            result = (Insurance) q.getSingleResult();
         } catch (Exception e) {
             System.out.println("Error" + e.getMessage());
             return null;
         }
         return result;
     }
-    
+
     public void persist(Insurance insurance) {
         insurancesEntityManager.persist(insurance);
     }

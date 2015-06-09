@@ -2,8 +2,6 @@ package com.carplates.web.view;
 
 import com.carplates.domain.Owner;
 import com.carplates.ejb.GlobalManager;
-import com.carplates.ejb.OwnersManager;
-
 import javax.enterprise.context.RequestScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -12,10 +10,8 @@ import javax.faces.convert.FacesConverter;
 import javax.inject.Inject;
 
 /**
- * User: sebastianpawlak
- * Date: 24.05.2013
+ * User: sebastianpawlak Date: 24.05.2013
  */
-
 @RequestScoped
 @FacesConverter("owner.global.converter")
 public class GlobalOwnerConverter implements Converter {
@@ -27,8 +23,8 @@ public class GlobalOwnerConverter implements Converter {
     public Object getAsObject(FacesContext facesContext, UIComponent uiComponent, String s) {
 
         try {
-        	String[] elements = s.split(";");
-        	Long id = new Long(elements[0]);
+            String[] elements = s.split(";");
+            Long id = new Long(elements[0]);
             return globalManager.getOwnerByIdAndRegion(id, elements[1]);
         } catch (Exception e) {
             return null;
@@ -44,8 +40,6 @@ public class GlobalOwnerConverter implements Converter {
         } catch (Exception e) {
             return null;
         }
-
-
 
     }
 }

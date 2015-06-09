@@ -4,14 +4,14 @@ import com.carplates.domain.CarPlate;
 import com.carplates.domain.Comparer;
 import com.carplates.domain.Owner;
 import com.carplates.ejb.GlobalManager;
-
-import javax.enterprise.context.RequestScoped;
+import java.io.Serializable;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-import java.io.Serializable;
-import java.util.Collection;
-import java.util.*;
 
 /**
  * User: sebastianpawlak Date: 24.05.2013
@@ -98,7 +98,7 @@ public class GlobalView implements Serializable {
                 } else {
                     result = Comparer.compare(o1.getFirstName(), o2.getFirstName());
                 }
-                if(!orderAscending){
+                if (!orderAscending) {
                     result *= -1;
                 }
                 return result;
@@ -120,21 +120,21 @@ public class GlobalView implements Serializable {
                 } else if ("model".equals(plateField)) {
                     result = Comparer.compare(o1.getCarModel(), o2.getCarModel());
                 } else if ("regDate".equals(plateField)) {
-                    result = Comparer.compare(o1.getRegistrationDate(),o2.getRegistrationDate());
+                    result = Comparer.compare(o1.getRegistrationDate(), o2.getRegistrationDate());
                 } else if ("firstRegDate".equals(plateField)) {
-                    result = Comparer.compare(o1.getFirstRegistrationDate(),o2.getFirstRegistrationDate());
+                    result = Comparer.compare(o1.getFirstRegistrationDate(), o2.getFirstRegistrationDate());
                 } else if ("expiryDate".equals(plateField)) {
-                    result = Comparer.compare(o1.getRegistrationExpirationDate(),o2.getRegistrationExpirationDate());
+                    result = Comparer.compare(o1.getRegistrationExpirationDate(), o2.getRegistrationExpirationDate());
                 } else if ("vin".equals(plateField)) {
                     result = Comparer.compare(o1.getVin(), o2.getVin());
                 } else if ("auth".equals(plateField)) {
                     result = Comparer.compare(o1.getRegistrationAuthority(), o2.getRegistrationAuthority());
                 } else if ("regNo".equals(plateField)) {
-                    result = Comparer.compare(o1.getRegistrationNumber(),o2.getRegistrationNumber());
+                    result = Comparer.compare(o1.getRegistrationNumber(), o2.getRegistrationNumber());
                 } else {
-                    result = Comparer.compare(o1.getCarBrand(),o2.getCarBrand());
+                    result = Comparer.compare(o1.getCarBrand(), o2.getCarBrand());
                 }
-                if(!orderAscending){
+                if (!orderAscending) {
                     result *= -1;
                 }
                 return result;
@@ -144,7 +144,7 @@ public class GlobalView implements Serializable {
     }
 
     public String sortPlateBy(String plateField) {
-        
+
         if (this.plateField.equals(plateField)) {
             orderAscending = !orderAscending;
         }
@@ -153,9 +153,9 @@ public class GlobalView implements Serializable {
 
         return null;
     }
-    
+
     public String sortBy(String fieldName) {
-        
+
         if (this.fieldName.equals(fieldName)) {
             orderAscending = !orderAscending;
         }
@@ -164,7 +164,7 @@ public class GlobalView implements Serializable {
 
         return null;
     }
-    
+
     public List<Owner> getOwnersForCarplate(CarPlate carplate) {
         System.out.println("HEEEEEEEEEEEEEEEEEJAAAAAAAAAAAAAAAAAA");
         return globalManager.getAllOwnersForCarPlate(carplate);

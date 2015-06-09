@@ -1,10 +1,18 @@
 package com.carplates.domain;
 
-import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
+import javax.persistence.CollectionTable;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 /**
  * User: sebastianpawlak Date: 23.05.2013
@@ -27,7 +35,6 @@ public class CarPlate {
 //            joinColumns={@JoinColumn(name="carplateid")},
 //            inverseJoinColumns={@JoinColumn(name="ownerid")})
 //    private Set<Owner> owners;
-    
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "carplates_owners", joinColumns = @JoinColumn(name = "carplateid"))
     @Column(name = "ownerpesel")
@@ -63,14 +70,12 @@ public class CarPlate {
         this.registrationAuthority = registrationAuthority;
     }
 
-    
 //    public Set<Owner> getOwners() {
 //        return owners;
 //    }
 //    public void setOwners(Set<Owner> owners) {
 //        this.owners = owners;
 //    }
-
     public List<String> getPesels() {
         return pesels;
     }
@@ -78,7 +83,7 @@ public class CarPlate {
     public void setPesels(List<String> pesels) {
         this.pesels = pesels;
     }
-    
+
     public String getRegistrationNumber() {
         return registrationNumber;
     }

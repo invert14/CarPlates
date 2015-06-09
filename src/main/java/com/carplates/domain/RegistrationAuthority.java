@@ -1,10 +1,13 @@
 package com.carplates.domain;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
- * User: sebastianpawlak
- * Date: 23.05.2013
+ * User: sebastianpawlak Date: 23.05.2013
  */
 @Entity
 @Table(name = "registrationauthorities")
@@ -64,12 +67,18 @@ public class RegistrationAuthority {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         RegistrationAuthority that = (RegistrationAuthority) o;
 
-        if (id != null ? !id.equals(that.id) : that.id != null) return false;
+        if (id != null ? !id.equals(that.id) : that.id != null) {
+            return false;
+        }
 
         return true;
     }

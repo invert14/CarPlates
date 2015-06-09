@@ -1,28 +1,28 @@
 package com.carplates.web.view;
 
-import com.carplates.domain.*;
-import com.carplates.ejb.*;
+import com.carplates.domain.CarPlate;
+import com.carplates.domain.Comparer;
+import com.carplates.domain.Owner;
+import com.carplates.ejb.CarPlatesManager;
 import com.carplates.web.view.session.UserSession;
-import org.jboss.solder.servlet.http.RequestParam;
-
+import java.io.IOException;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
-import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Instance;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
-import java.io.IOException;
-import java.io.Serializable;
-import java.util.*;
+import org.jboss.solder.servlet.http.RequestParam;
 
 /**
- * User: sebastianpawlak
- * Date: 23.05.2013
+ * User: sebastianpawlak Date: 23.05.2013
  */
-
 @Named
 @ViewScoped
 public class CarPlatesView implements Serializable {
@@ -47,7 +47,7 @@ public class CarPlatesView implements Serializable {
 
     @PostConstruct
     public void init() {
-        if(carPlateId.get() == null || carPlateId.get() < 1) {
+        if (carPlateId.get() == null || carPlateId.get() < 1) {
             prepareToAdd();
         } else {
             prepareToEdit();
@@ -91,7 +91,9 @@ public class CarPlatesView implements Serializable {
     }
 
     public List<CarPlate> getCarPlates() {
-        if(userSession.isGlobal()) return new ArrayList<CarPlate>();
+        if (userSession.isGlobal()) {
+            return new ArrayList<CarPlate>();
+        }
 
         return sortPlates(carPlatesManager.getCarPlates());
     }
@@ -147,14 +149,14 @@ public class CarPlatesView implements Serializable {
 
     }
 
-
     private enum Mode {
-        ADD,EDIT
+
+        ADD, EDIT
     }
-    
+
     private Boolean orderAscending = Boolean.TRUE;
     private String plateField = "brand";
-    
+
     private List<CarPlate> sortPlates(List<CarPlate> plates) {
         if (plates == null) {
             return null;
@@ -168,11 +170,11 @@ public class CarPlatesView implements Serializable {
                 } else if ("model".equals(plateField)) {
                     result = Comparer.compare(o1.getCarModel(), o2.getCarModel());
                 } else if ("regDate".equals(plateField)) {
-                    result = Comparer.compare(o1.getRegistrationDate(),o2.getRegistrationDate());
+                    result = Comparer.compare(o1.getRegistrationDate(), o2.getRegistrationDate());
                 } else if ("firstRegDate".equals(plateField)) {
-                    result = Comparer.compare(o1.getFirstRegistrationDate(),o2.getFirstRegistrationDate());
+                    result = Comparer.compare(o1.getFirstRegistrationDate(), o2.getFirstRegistrationDate());
                 } else if ("expiryDate".equals(plateField)) {
-                    result = Comparer.compare(o1.getRegistrationExpirationDate(),o2.getRegistrationExpirationDate());
+                    result = Comparer.compare(o1.getRegistrationExpirationDate(), o2.getRegistrationExpirationDate());
                 } else if ("vin".equals(plateField)) {
                     result = Comparer.compare(o1.getVin(), o2.getVin());
                 } else if ("auth".equals(plateField)) {
@@ -180,9 +182,9 @@ public class CarPlatesView implements Serializable {
                 } else if ("regNo".equals(plateField)) {
                     result = Comparer.compare(o1.getRegistrationNumber(), o2.getRegistrationNumber());
                 } else {
-                    result = Comparer.compare(o1.getCarBrand(),o2.getCarBrand());
+                    result = Comparer.compare(o1.getCarBrand(), o2.getCarBrand());
                 }
-                if(!orderAscending){
+                if (!orderAscending) {
                     result *= -1;
                 }
                 return result;
@@ -192,7 +194,7 @@ public class CarPlatesView implements Serializable {
     }
 
     public String sortPlateBy(String plateField) {
-        
+
         if (this.plateField.equals(plateField)) {
             orderAscending = !orderAscending;
         }
@@ -201,5 +203,5 @@ public class CarPlatesView implements Serializable {
 
         return null;
     }
-    
+
 }
