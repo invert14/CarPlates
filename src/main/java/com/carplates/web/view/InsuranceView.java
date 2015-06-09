@@ -31,7 +31,7 @@ public class InsuranceView implements Serializable {
         if (!userSession.isInsurance()) {
             return new LinkedList<Insurance>();
         }
-        return insurancesManager.findAll();
+        return insurancesManager.findByCompany(userSession.getLoggedInUser().getUsername());
     }
 
     public Boolean isCarplateInsured(String carplate) {

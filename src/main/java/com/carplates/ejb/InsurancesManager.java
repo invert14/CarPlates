@@ -1,14 +1,12 @@
 package com.carplates.ejb;
 
 import com.carplates.domain.Insurance;
-import com.carplates.web.view.session.UserSession;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.ejb.Stateless;
-import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -25,9 +23,6 @@ public class InsurancesManager {
 
     Map<String, EntityManager> insurancesManagers;
 
-    @Inject
-    private UserSession userSession;
-
     @PostConstruct
     public void init() {
         insurancesManagers = new HashMap<String, EntityManager>();
@@ -35,12 +30,8 @@ public class InsurancesManager {
         insurancesManagers.put("ins_wrt", insurancesEntityManagerWRT);
     }
 
-    private EntityManager getEntityManager() {
-        return insurancesManagers.get(userSession.getLoggedInUser().getUsername());
-    }
-
-    public List<Insurance> findAll() {
-        EntityManager em = getEntityManager();
+    public List<Insurance> findByCompany(String username) {
+        EntityManager em = insurancesManagers.get(username);
         if (em == null) {
             return null;
         }
@@ -69,29 +60,5 @@ public class InsurancesManager {
             }
         }
         return insurances;
-    }
-
-    public void persist(Insurance insurance) {
-        EntityManager em = getEntityManager();
-        if (em == null) {
-            return;
-        }
-        persist(insurance);
-    }
-
-    public Insurance merge(Insurance insurance) {
-        EntityManager em = getEntityManager();
-        if (em == null) {
-            return null;
-        }
-        return getEntityManager().merge(insurance);
-    }
-
-    public void remove(Insurance insurance) {
-        EntityManager em = getEntityManager();
-        if (em == null) {
-            return;
-        }
-        getEntityManager().remove(insurance);
     }
 }
